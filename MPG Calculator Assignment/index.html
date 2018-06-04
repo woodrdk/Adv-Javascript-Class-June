@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">	
+    <title>Calculate MPG</title>
+    <link rel="stylesheet" href="css/mpg.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    
+    
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/mpgCalc.js"></script>
+    <style>
+        img {
+            max-width: 100%;
+        }
+        .ui-progressbar {
+            height: 2em;
+            text-align: left;
+            overflow: hidden;
+            
+        }
+        .ui-progressbar .ui-progressbar-value {
+            margin: -1px;
+            height: 100%;
+            background-color: red;
+            
+        }
+        .ui-progressbar .ui-progressbar-overlay {
+            background-color: blue;
+            height: 100%;
+                        filter: alpha(opacity=25); /* support: IE8 */
+            opacity: 0.25;
+        }
+        .ui-progressbar-indeterminate .ui-progressbar-value {
+            background-color:red;
+            
+        }
+     
+        .center { text-indent:25% }
+
+    </style>
+
+</head>
+<body>
+    <aside>
+        <img src="speedo.jpg" alt="speedometer">
+    </aside>
+    <main>
+        <form id="form">
+            <h1>Calculate Your Miles Per Gallon</h1>
+            <label for="miles">Miles Driven:</label>
+            <input type="text" id="miles">
+            <span>* </span><br>
+            <label for="gallons">Gallons of Gas Used:</label>
+            <input type="text" id="gallons">
+            <span>* </span><br>
+            <label for="mpg">Miles Per Gallon</label>
+            <input type="text" id="mpg" disabled><br>
+            <label>&nbsp;</label>
+            <input type="button" id="calculate" onclick="main()" value="Calculate MPG"><br>
+            <label>&nbsp;</label>
+            <input type="button" id="clear" value="Clear Entries"><br>
+            * = Required Info
+        </form>
+        
+    </main>
+    
+    
+    <footer>
+            <p>&copy; Robert M. Wood Jr</p>
+            <p>Contact information: <a href="mailto:rdrwood@gmail.com">
+            rdrwood@gmail.com</a>.</p>
+    </footer>
+</body>
+</html>
+

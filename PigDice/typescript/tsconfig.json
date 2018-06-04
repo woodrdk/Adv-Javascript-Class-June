@@ -1,0 +1,13 @@
+
+{
+    "files": [
+        "typescript/Game.ts",
+        "typescript/Main.ts"
+    ],
+    "compilerOptions":{
+        "removeComments": true,
+        "target": "es5",
+        "watch": true,
+        "outfile": "scripts/code.js"
+    }
+}

@@ -1,0 +1,57 @@
+body{
+    background-color: black;
+    border: 3px solid red;
+}
+footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+aside{
+    float: left;
+  
+}
+
+section{
+    color: white;
+    padding: 0 2em 1em;
+    clear: both;
+}
+main {
+    
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    /*background-image: url(../gotmpg.jpg);*/
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top right; 
+    margin: 0 auto;
+    width: 50%;
+   
+	padding: 0 2em 1em;
+    float: right;
+    color: white;
+}
+h1 {
+	color: red;
+	margin-bottom: .25em;
+}
+label {
+	float: left;
+    width: 11em;
+    text-align: right;
+}
+input {
+    margin-left: 1em;
+	margin-right: .5em;
+    margin-bottom: .5em;
+    width: 11em;   
+}
+span {
+	color: red;
+}
+

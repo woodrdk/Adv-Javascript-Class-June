@@ -1,0 +1,69 @@
+h1{
+    text-align:center;
+    border: 2px solid red;
+    padding: .75em;
+    background-color:black;
+    margin-left: 15%;
+    margin-right: 15%;
+    border-radius: 10px;
+    color: white;
+}
+
+#gameBoard{
+    display:flex;
+}
+
+#player1Board, #player2Board, 
+    #gameButtons{
+        background-color:lightblue;
+        padding: 1em;
+        border: 2px solid black;
+        margin: .75em;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        
+}
+
+
+
+#buttons{
+    display:flex;
+    justify-content: center;
+}
+
+div#buttons>button[type=button]{
+    font-size: 1.25em;
+    padding: .5em;
+    margin: 2px;
+    cursor:pointer;
+}
+
+@media only screen and (max-width: 768px){
+
+    #gameBoard{
+        flex-direction: column;
+    }
+
+    h1{
+        display:none;
+    }
+}
+
+#dieDisplay img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img{
+    border-radius: 10px;
+}
+.button{
+    border-radius: 10px;
+}
+
+#gameButtons{
+    background-color: black;
+    color: azure;
+}

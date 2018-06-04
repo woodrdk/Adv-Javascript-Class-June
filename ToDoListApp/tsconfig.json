@@ -1,0 +1,12 @@
+{
+    "files": [
+        "typescript/main.ts",
+        "typescript/ToDoItem.ts"
+    ],
+    "compilerOptions": {
+        "removeComments": true,
+        "outFile": "scripts/code.js",
+        "target": "es2015",
+        "watch" : true
+    }
+}

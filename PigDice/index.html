@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Pig Dice online for free. No download required, flash not required. Play against another human.">
+    <title>Play Pig Dice Online</title>
+    <link href="stylesheets/site.css" rel="stylesheet">
+    <script src="scripts/myCode.js"></script>
+    
+</head>
+<body>
+    <audio id="myAudio">
+        <source src="rolling.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <header>
+        <h1>Pig Dice Game!</h1>
+        <hr>
+    </header>
+    
+    <div id="gameBoard">
+        <div id="player1Board" style = "background:yellow">
+            <ul style="list-style-type:none">
+                <li><label>Player 1</label></li>
+                <li><img src="images/beachPig.jpg" height="150" alt="Player 1 Picture. Pig on a beach"></li>
+                <li><input type="text" id="player1Score" placeholder="0"></li>
+              </ul>
+        </div>
+
+        <div>
+            <!-- Dice roll area-->
+        </div>
+        <div id="gameButtons">
+            <label>Current Turn Score:</label>
+            <input type="text" id="turnScore">
+            <br><br>
+
+            <div id="buttons">
+                <button class="button" id="roll" type="button" onClick="rollDice()">Roll</button>
+                <!--<button class="button"  id="pass" type="button" onclick="passTurn()">Pass</button>-->
+                <button class="button"  id="hold" type="button" onclick="holdTurn()">Pass</button>
+                <div id="messageboard" class="whosTurn" style="display: block;"></div>
+            </div><br>
+            <div id="dieDisplay">
+                <img src="images/die1.jpg" id="die" style="width: 50px; height:50px;"  alt="Dice number 1">
+            </div><br><br>
+            <div id="whosWinning">
+                <label>Who is winning:</label>
+                <input type="text" id="winning">
+            </div>
+            <div><button class="button" id="reset" type="button" onclick="reset()">Reset Game</button></div>
+        </div>
+
+        <div id="player2Board">
+            <ul style="list-style-type:none">
+                <li><label>Player 2</label></li>
+                <li><img src="images/piglet.jpg" alt="Player 2 Image. Little piglet"></li>
+                <li><input type="text" id="player2Score" placeholder="0"></li>
+              </ul>        
+            
+        </div>
+    </div>
+    <section id="gameRules">
+        <h2>Pig Dice Rules</h2>
+        <ul>
+            <li>Player 1 starts</li>
+            <li>Whichever player's turn it is has their info highlighted in yellow</li>
+            <li>Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to "hold":</li> 
+            <li>If the player rolls a 1, they score nothing and it becomes the next player's turn.</li>
+            <li>If the player rolls any other number, it is added to their turn total and the player's turn continues.</li>
+            <li>If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.</li>
+            <li>The first player to score 100 or more points wins.</li>
+            <li>Winner turns green  at end of game</li>
+            <li>To reset the game or start a new game push reset</li>
+        </ul>
+        <p>
+        For example, the first player, Anne, begins a turn with a roll of 5. Anne could hold and score 5 points, but 
+        chooses to roll again. Anne rolls a 2, and could hold with a turn total of 7 points, but chooses to roll again. 
+        Anne rolls a 1, and must end her turn without scoring. The next player, Bob, rolls the sequence 4-5-3-5-5, after which
+        he chooses to hold, and adds his turn total of 22 points to his score.
+        </p>
+    </section>
+</body>
+</html>

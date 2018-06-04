@@ -1,0 +1,10 @@
+{
+    "files": [
+        "mpgCalc.ts"
+    ],
+    "compilerOptions": {
+        "removeComments": true,
+        "outDir": "js",
+        "outFile":"scripts/mpgCalc.js"
+    }
+}

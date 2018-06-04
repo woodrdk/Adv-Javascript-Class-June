@@ -1,0 +1,58 @@
+
+button[type=button]{
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgb(14, 100, 14);
+    color: white;
+    cursor: pointer;
+}
+
+button[type=button]:hover{
+    background-color: rgb(229, 255, 0);
+}
+
+input[type=text]{
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 1px solid rgb(252, 4, 4);
+    width:60%;
+    margin-bottom: 10px;
+}
+
+div#todoForm{
+    background-color: beige;
+    padding: 15px;
+    border-radius: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+label{
+    margin-right: 10px;
+    border-bottom: 1px solid black;
+    padding-bottom: 3px;
+    font-size: 1.25em;
+    width: 15%;
+    display: inline-block;
+    text-align:left;
+}
+
+div#buttonWrapper{
+    margin-left:auto;
+    margin-right:auto;
+    width: 35%;
+    margin-top: 15px;
+}
+
+.itemDone{
+    color:rgb(190, 80, 80);
+    text-decoration: line-through;
+}
+
+div#intro{
+    text-align: center;
+}
+
+div#details{
+    float: right;
+}

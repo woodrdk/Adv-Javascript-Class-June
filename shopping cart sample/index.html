@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart Example</title>
+
+    <style>
+        #shopping-cart{
+            font-size: 1.25em;
+            position:absolute;
+            top:.5em;
+            right:5%;
+        }
+    </style>
+</head>
+<body>
+    <div id="shopping-cart">
+        &#x1f6d2;<br>
+        <span>0 Items in Cart</span>
+    </div>
+    <div id="product-list">
+        <div>
+            <img src="http://via.placeholder.com/150x150" alt="Product Image">
+           <span>Product #1</span>
+           <span>$99.99</span>
+           <button type="button"
+                    data-product-id="1"
+                    data-product-price="99.99">
+               Add to Cart
+            </button>
+        </div>
+        <div>
+            <img src="http://via.placeholder.com/150x150" alt="Product Image">
+            <span>Gadget</span>
+            <span>$5.49</span>
+            <button type="button"
+                    data-product-id="2"
+                    data-product-price="5.49">
+                    Add to Cart
+            </button>
+        </div>
+        <div>
+            <img src="http://via.placeholder.com/150x150" alt="Product Image">
+            <span>Product #1</span>
+            <span>$99.99</span>
+            <button type="button">Add to Cart</button>
+        </div>
+        <div>
+            <img src="http://via.placeholder.com/150x150" alt="Product Image">
+            <span>Product #1</span>
+            <span>$99.99</span>
+            <button type="button">Add to Cart</button>
+        </div>
+        
+    </div>
+
+    <script>
+        window.onload = function(){
+            
+            //get all "Add to Cart" buttons
+            var cartButtons =
+                document
+                .querySelectorAll("#product-list button");
+
+            for(var i = 0; i < cartButtons.length; i++){
+            
+                //add click event for each "Add to Cart" button
+                cartButtons[i].onclick = function(){
+                    //this = the element that triggered the onclick event
+                    var currButton = this;
+                    console.log(this);
+
+                    var prodID = currButton
+                        .getAttribute("data-product-id");
+                    var price = currButton
+                        .getAttribute("data-product-price");
+                    //alert(prodID + "\n" + price);
+                    var prod = new Product(prodID, price);
+                    
+                    addProductToCart(prod);
+                    
+                }
+            }
+        }
+    </script>
+    <script src="CookieHelper.js"></script>
+    <script src="cartApp.js"></script>
+</body>
+</html>

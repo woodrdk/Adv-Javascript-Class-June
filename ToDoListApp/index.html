@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Infamous ToDo List</title>
+    <link rel="stylesheet" href="stylesheets/site.css">
+</head>
+<body>
+    <div id="intro"><h1>The Infamous ToDo List</h1>
+        <p>
+            Welcome to The Infamous ToDo List. 
+            We all have things to do and do not always get it all done as there is never enough time. 
+            Plug your tasks in and get started with progress.
+        </p>
+    </div>
+
+    <br><br>
+    <div id="todoForm">
+        <label>Title</label>
+        <input placeholder="Title" type="text" id="title">
+        <span> </span><br>
+
+        <label>Description</label>
+        <input placeholder="Description" type="text" id="description">
+        <span> </span><br>
+
+        <label>Date Added</label>
+        <input placeholder="Date Added" type="text" id="dateAdded">
+        <span> </span><br>
+
+        <label>Category</label>
+        <input placeholder="Category" type="text" id="category">
+        <span> </span><br>
+    </div>
+    <div id="buttonWrapper">
+        <button id="addItem" type="button">Add new ToDo</button>
+        <button id="displayItems" type="button">Display Items</button>
+    </div>
+
+    <div>
+        <h2>Item List</h2>
+        <ul id="itemList">
+
+        </ul>
+    </div>
+
+    <div>
+        <h2>Details</h2>
+        <ul id="details">
+
+        </ul>
+    </div>
+
+    <script src="scripts/code.js"></script>
+
+
+</body>
+</html>

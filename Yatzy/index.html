@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="shortcut icon" href="images/dice.ico">
+        <link rel="stylesheet" href="css/style.css">
+    
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><!-- for the nav bar-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script><!-- for the nav bar-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><!-- for the nav bar-->
+
+        <title>Welcome to YATZY</title>
+    </head>
+    <body>
+
+        </header>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">YATZY    <img src="images/dice.png" alt= "dice">          </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#">New Game</a></li>
+                <li><a href="rules.html" target="_blank">Instructions / Rules</a></li>
+                <li><a href="#">About</a></li>
+                <li></li>
+            </ul>
+            </div>
+        </nav>
+
+        <main>
+                
+            <div id="main">
+            <div id="toPlay">
+                <div id="yourName">What is your name?  &nbsp; &nbsp;
+                    <input type="text" id="mainUserName" class="inputs" > 
+                    <button id="sendName" onClick="verifyUserName()"> Send Name</button>
+                </div>   
+                
+                <div id="doYou" hidden> </div>   
+            
+                <div id="yesNoButton" hidden><br>
+                    <button class="yesButton" onclick="loadGame()">Yes, Lets play</button>
+                    <button class="noButton" onClick="redirect()">No thanks. Send me to Google</button>    
+                </div>  
+
+            </div>
+            <div id="playerNames">
+                    <input type="text" id="playerTwoName" class="inputs" placeholder="Player 2 Name" hidden>   <br>
+                    <input type="text" id="playerThreeName" class="inputs" placeholder="Player 3 Name" hidden> <br>
+                    <input type="text" id="playerFourName" class="inputs" placeholder="Player 4 Name"  hidden> <br>
+                    <button id="sendNames" onClick="addPlayerNames()" hidden>Add Names</button>
+            </div>    
+        
+            <div id= "howMany" hidden>   
+                How Many People want to play?<br><br>
+                <button class="onePlayer" onClick="choose('1')">One Player</button>
+                <button class="twoPlayer" onClick="choose('2')">Two Players</button>
+                <button class="threePlayer" onClick="choose('3')">Three Players</button>
+                <button class="fourPlayer" onClick="choose('4')">Four Players</button>
+            </div>
+
+        
+
+            
+            <br><br><br>
+            <div id="divRoll">
+                <button class="roll" id="roll" onclick="myMove(), rollDice()" hidden>Roll Dice</button>
+                <button class="roll" id="hold" onclick=" getdies()" hidden>Hold Dice</button>
+            </div>
+            <div id ="container" hidden>
+                <div id ="animate">
+                    <img src="/images/die1.jpg" id="dicePic1"> 
+                    <img src="/images/die2.jpg" id="dicePic2"> 
+                    <img src="/images/die3.jpg" id="dicePic3"> 
+                    <img src="/images/die4.jpg" id="dicePic4"> 
+                    <img src="/images/die5.jpg" id="dicePic5"> 
+                    <img src="/images/die6.jpg" id="dicePic6"> 
+
+                </div>
+            </div>
+            </div>
+        </main>
+        <article id="winners" hidden>
+            <table >
+                <tr id="if" hidden>
+                    <td ><img src="images/trophy.png" alt="trophy"></td>
+                    <td id="winner"></td>
+                </tr>
+                    
+                <tr id="if2" hidden>
+                    <td><img src="images/2nd.jpg" alt="second place trophy"></td>
+                    <td id="1stPlace"></td>
+                    
+                </tr>
+                
+                <tr id="if3" hidden>
+                    <td><img src="images/3rd.jpg" alt="3rd place trophy"></td>
+                    <td id="2ndPlace"></td>
+                    
+                </tr>
+
+                <tr id="if4" hidden>
+                    <td><img src="images/4th.png" alt="4th place ribbon"></td>
+                    <td id="4thPlace"></td>
+                </tr>
+
+            </table>
+        </article>
+        <aside>
+            <div id="scoreCard" hidden>
+                <table>
+                    <colgroup>
+                        <col class="col1" />
+                        <col class="col2" />
+                        <col class="col3" />
+                        <col class="col4" />
+                        <col id="col5" />
+                    </colgroup>
+                    <tr id="Player">
+                        <th></th>  
+                    </tr>
+
+                    <tr id="Upper Section">
+                        <th>Upper Section</th>   
+                    </tr>
+
+                    <tr id="Aces">
+                        <th>Aces</th>
+                    </tr>
+
+                    <tr id="Twos">
+                        <th>Twos</th>
+                    </tr>
+
+                    <tr id="Threes">
+                        <th>Threes</th>
+                    </tr>
+
+                    <tr id="Fours">
+                        <th>Fours</th>
+                    </tr>
+
+                    <tr id="Fives">
+                        <th>Fives</th>
+                    </tr>
+
+                    <tr id="Sixes">
+                        <th>Sixes</th>
+                    </tr>
+
+                    <tr id="Total Score">
+                        <th>Total Score</th>
+                    </tr>
+
+                    <tr id="Bonus">
+                        <th>Bonus (if total score > 63)</th>
+                    </tr>
+
+                    <tr id="Total">
+                        <th>Total</th>
+                    </tr>
+
+                    <tr id="Lower Section">
+                        <th>Lower Section</th>
+                    </tr>
+
+                    <tr id="Full House">
+                        <th>Full House</th>
+                    </tr>
+
+                    <tr id="3 of a kind">
+                        <th>3 of a kind</th>
+                    </tr>
+
+                    <tr id="4 of a kind">
+                        <th>4 of a kind</th>
+                    </tr>
+
+                    <tr id="Small Straight">
+                        <th>Small Straight</th>
+                    </tr>
+
+                    <tr id="Large Straight">
+                        <th>Large Straight</th>
+                    </tr>        
+
+                    <tr id="Yatzy">
+                        <th>Yatzy</th>
+                    </tr>
+
+                    <tr id="Chance">
+                        <th>Chance</th>                                
+                    </tr>
+
+                    <tr id="Double Yatzy">
+                        <th>Double Yatzy</th>
+                    </tr>
+
+                    <tr id="Lower Total">
+                        <th>Lower Total</th>
+                    </tr>
+                    
+                    <tr id="Upper Total">
+                        <th>Upper Total</th>
+                    </tr>
+
+                    <tr id="Grand Total">
+                        <th>Grand Total</th>
+                    </tr>
+                </table>
+            </div>
+        </aside>
+
+        <section>
+            <div id="diced" hidden >
+                <div id="diceRolled" class "diceRoll">
+                    <input type="image" src="images/die1.jpg" name="none" class="die" id="die1" style="width: 50px;" hidden/>
+                    <input type="image" src="images/die2.jpg" name="none" class="die" id="die2" style="width: 50px;" hidden/>
+                    <input type="image" src="images/die3.jpg" name="none" class="die" id="die3" style="width: 50px;" hidden/>
+                    <input type="image" src="images/die4.jpg" name="none" class="die" id="die4" style="width: 50px;" hidden/>
+                    <input type="image" src="images/die5.jpg" name="none" class="die" id="die5" style="width: 50px;" hidden/>
+                    <br><br>               
+                </div>
+
+                <div>Current Roll ^^</div>
+                <div>Held Dice Below </div>
+                <div id= "diceKept" class "diceKept"> 
+                    <br><br>
+                    <input type="image" id="keptdie1" src="" class="die" style="width: 50px;" hidden>
+                    <input type="image" id="keptdie2" src="" class="die" style="width: 50px;" hidden>
+                    <input type="image" id="keptdie3" src="" class="die" style="width: 50px;" hidden>
+                    <input type="image" id="keptdie4" src="" class="die" style="width: 50px;" hidden>
+                    <input type="image" id="keptdie5" src="" class="die" style="width: 50px;" hidden>
+                
+                </div>
+            </div>
+            <!-- following divs contaiiner and animate for dic rolling-->
+            
+        </section>
+    
+        <footer>
+            &copy; 2018 Robert M. Wood Jr
+        </footer>
+
+        <script src = "js/nameCode.js"></script>
+        <script src = "js/rollDIce.js"></script>
+    </body>
+</html>

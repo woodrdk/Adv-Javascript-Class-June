@@ -1,0 +1,13 @@
+Objective:
+Create a functional pig dice game
+2 human players can play against each other
+
+Rules:
+- Players take turns rolling a single dice
+- Player accumlates a turn total with each dice roll
+- If player rolls a 1, they get 0 points for their turn
+    and the next player starts their turn
+- If player rolls 2 - 6, they die roll gets added to their
+    turn total until they decide to hold and pass turn
+    to next player
+- Win Condition: First player to 100 points wins
