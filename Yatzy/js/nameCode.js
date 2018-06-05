@@ -210,33 +210,35 @@ function hold(){
 
 function turnScore(dieScore){
     dieScore.sort();
-    alert(dieScore); // for testing sake
+    // alert(dieScore); // for testing sake
     var scoresString = dieScore.join('');
-    alert(scoresString); // for testing sake
+     alert(scoresString); // for testing sake
 
     var uniqueNums = [];
     $.each(dieScore, function(i, el){
         if($.inArray(el, uniqueNums) === -1) uniqueNums.push(el);
     });
-    alert(uniqueNums.toString()); // for testing sake
+    // alert(uniqueNums.toString()); // for testing sake
 
     var uniqueScores = uniqueNums.join('');
     alert(uniqueScores); // for testing sake
+    
+    var threeOfKind = false;
+    threeOfKind = /^\d{3}/.test(scoresString);
+    if(threeOfKind == true){
+        alert("three");
+    }
 
-    var yatzyScore = /\d{4}/.test(scoresString);
-    // 
-    if(/1234/.test(uniqueScores) == "true" || /2345/.test(uniqueScores) == "true" || /3456/.test(uniqueScores)== "true"){
-        var smallS = true;
+    var fourOfKind = false;
+    fourOfKind = /^\d{4}/.test(scoresString);
+    if(fourOfKind == true){
+        alert("four");
     }
-    var largeS = /12345|23456/.test(scoresString);
-    var fourOfKind = /\d{3}/.test(scoresString);
-    var threeOfKind = /\d{2}/.test(scoresString);
+
     var fullHouse = /\d{2}/ && /\d{3}/.test(scoresString);
-    var chance = true;
+    
     /*
-    if (yatzyScore == true) {
-        alert("yatzy");
-    }
+
     else if (fourOfKind == true) {
         alert("Four of a Kind");
     }
@@ -248,8 +250,15 @@ function turnScore(dieScore){
     }
     */
 
+   var yatzyScore = false;
+   if(uniqueScores.length == 1){
+       alert("yatzy");
+   }
 
- 
+    var smallS = false;
+    if(uniqueScores == "1234" || uniqueScores == "2345" || uniqueScores == "3456" ){
+        smallS = true;
+    }
     if (smallS == true) {
        // var ss = document.getElementById("Small Straight " + player);
        // var ssInfo = document.createTextNode("40");
@@ -257,6 +266,10 @@ function turnScore(dieScore){
         alert("Small Straight");
     }
 
+    var largeS = false;
+    if(uniqueScores == "12345" || uniqueScores == "23456"){
+        largeS = true;
+    }
     else if (largeS == true) {
         //var ls = document.getElementById("Large Straight " + player);
         //var lsInfo = document.createTextNode("40");
@@ -264,7 +277,8 @@ function turnScore(dieScore){
         alert("large straight");
     }
     // chance section of scoring working as coded needs to append to score board
-    
+
+    var chance = true;
     var chanceTotal = 0;
     if(chance == true){
         for(chanceLoop = 0; chanceLoop < 5; chanceLoop++){
@@ -273,7 +287,7 @@ function turnScore(dieScore){
         //var chanceLocation = document.getElementById("Chance player " + player);
         //var chanceInfo = document.createTextNode(chanceTotal);
         //chanceLocation.appendChild(chanceInfo);
-        alert(chanceTotal);
+        // alert(chanceTotal); calculates just needs to insert score 
     }
     
     // playerTurn();
@@ -287,22 +301,22 @@ function getdies(){
                      document.getElementById("keptdie4").src, document.getElementById("keptdie5").src];
     var dieScore = [];
     for (let die = 0; die < dieSource.length; die++) {
-        if(dieSource[die] == "http://127.0.0.1:5500/images/die1.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy//images/die1.jpg"){
             dieScore[die] = 1;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/images/die2.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die2.jpg"){
             dieScore[die] = 2;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/images/die3.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die3.jpg"){
             dieScore[die] = 3;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/images/die4.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die4.jpg"){
             dieScore[die] = 4;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/images/die5.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die5.jpg"){
             dieScore[die] = 5;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/images/die6.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die6.jpg"){
             dieScore[die] = 6;
         }    
     }
