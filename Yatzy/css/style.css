@@ -18,8 +18,12 @@ footer {
     height: 100%;
     float: left;
     clear: left;
-    
   }
+
+  .col1, .col2,.col3, .col4{
+    background-color: greenyellow;
+  }
+
   
   main {
     clear: right;

@@ -19,12 +19,13 @@ window.onload = function(){
     var buttons = document.getElementsByClassName("die");
     var buttonsCount = buttons.length;
     for (var i = 0; i <= buttonsCount-1; i++) {
-        console.log(i);
         buttons[i].onclick = function(e) {
             moveDie(this.id);
         };
     }
+
 // /\/\/\/\/\/\/\  the get die  source function
+
 }
 
 // next step asking the user for their name
@@ -174,6 +175,13 @@ function makeScoreCard(players){
             category.appendChild(th);          
         }
     }
+    
+    
+    //loop to make the code to change colors 
+    for(var colorChange = 0; colorChange < 4; colorChange++ ){
+
+    }
+    document.getElementsByClassName("col" + playersTurn).style.backgroundColor = "white";
 }
 
 // is the roll dice function
@@ -210,50 +218,49 @@ function hold(){
 
 function turnScore(dieScore){
     dieScore.sort();
-    // alert(dieScore); // for testing sake
     var scoresString = dieScore.join('');
-     alert(scoresString); // for testing sake
-
     var uniqueNums = [];
     $.each(dieScore, function(i, el){
         if($.inArray(el, uniqueNums) === -1) uniqueNums.push(el);
     });
-    // alert(uniqueNums.toString()); // for testing sake
-
-    var uniqueScores = uniqueNums.join('');
-    alert(uniqueScores); // for testing sake
     
+    var uniqueScores = uniqueNums.join('');
+        
     var threeOfKind = false;
-    threeOfKind = /^\d{3}/.test(scoresString);
+    var kind3Total = 0;
+    threeOfKind = /(\d{1})\1\1/.test(scoresString);
     if(threeOfKind == true){
-        alert("three");
+        
+        for(kind3 = 0; kind3 < 5; kind3++){
+            kind3Total += dieScore[kind3];
+        }
+        alert("three of kind");
+        alert(kind3Total);
     }
+
 
     var fourOfKind = false;
-    fourOfKind = /^\d{4}/.test(scoresString);
+    var kind4Total = 0;
+    fourOfKind = /(\d{1})\1\1\1/.test(scoresString);
     if(fourOfKind == true){
-        alert("four");
+        for(kind4 = 0; kind4 < 5; kind4++){
+            kind4Total += dieScore[kind4];
+        }
+        alert("four of kind");
+        alert(kind4Total);
     }
 
-    var fullHouse = /\d{2}/ && /\d{3}/.test(scoresString);
-    
-    /*
+    // not working yet
+    var fullHouse = false;
+    fullHouse = /(\d{1})\1/.test(scoresString) && /(\d{1})\1\1/.test(scoresString);
+    if(fullHouse == true){
+        alert("FUll HOUSE");
+    }
 
-    else if (fourOfKind == true) {
-        alert("Four of a Kind");
+    var yatzyScore = false;
+    if(uniqueScores.length == 1){
+        alert("yatzy");
     }
-    else if (threeOfKind == true) {
-        alert("Three of a Kind");
-    }
-    else if (fullHouse == true) {
-        alert("Full House");
-    }
-    */
-
-   var yatzyScore = false;
-   if(uniqueScores.length == 1){
-       alert("yatzy");
-   }
 
     var smallS = false;
     if(uniqueScores == "1234" || uniqueScores == "2345" || uniqueScores == "3456" ){
@@ -290,7 +297,7 @@ function turnScore(dieScore){
         // alert(chanceTotal); calculates just needs to insert score 
     }
     
-    // playerTurn();
+    playerTurn();
 }
 
 
@@ -329,13 +336,14 @@ function getdies(){
 // currently functioning as designed below
 function setColor(playersTurn)
 {   
-    document.getElementById("Player player" + playersTurn).style.backgroundColor = "white";
+    document.getElementsByClassName("col" + playersTurn).style.backgroundColor = "white"
+    //document.getElementById("Player player" + playersTurn).style.backgroundColor = "white";
 }
 // sets the player whos turn it was back to none  
 // currently functioning as designed below
 function removeColor(playersTurn)
 {   
-    document.getElementById("Player player" + playersTurn).style.backgroundColor = null;
+    //document.getElementsByClassName("col " + playersTurn) ById("Player player" + playersTurn).removeAttribute(style);
 }
 
 // changes which players turn it is for score and for indicator
@@ -343,12 +351,13 @@ function playerTurn(){
     alert("player changed");    
     removeColor(playersTurn);
     setScore(playersTurn);
-    if(playersTurn == 4){
+    if(playersTurn == 3){
         playersTurn = 1;
     }
     else{
         playersTurn ++;
     }
+   
     setColor(playersTurn);
     dieRoll = 0;
 
