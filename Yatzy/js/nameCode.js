@@ -9,7 +9,7 @@ var scoreTotal = 0;
 var playerScoreTotal = [];
 var playerArray = [];
 var totalArray = [];
-var playersTurn = 0;
+var playersTurn = 1;
 var dieRoll = 0;
 
 // onload preperation
@@ -176,12 +176,8 @@ function makeScoreCard(players){
         }
     }
     
+    document.getElementById("col" + playersTurn).style.backgroundColor = "white";
     
-    //loop to make the code to change colors 
-    for(var colorChange = 0; colorChange < 4; colorChange++ ){
-
-    }
-    document.getElementsByClassName("col" + playersTurn).style.backgroundColor = "white";
 }
 
 // is the roll dice function
@@ -192,6 +188,8 @@ function rollDice(){
         document.getElementById("die3").removeAttribute("hidden");
         document.getElementById("die4").removeAttribute("hidden");
         document.getElementById("die5").removeAttribute("hidden");
+
+
     }
     if(dieRoll < 3){    
     
@@ -219,6 +217,7 @@ function hold(){
 function turnScore(dieScore){
     dieScore.sort();
     var scoresString = dieScore.join('');
+    
     var uniqueNums = [];
     $.each(dieScore, function(i, el){
         if($.inArray(el, uniqueNums) === -1) uniqueNums.push(el);
@@ -336,14 +335,13 @@ function getdies(){
 // currently functioning as designed below
 function setColor(playersTurn)
 {   
-    document.getElementsByClassName("col" + playersTurn).style.backgroundColor = "white"
-    //document.getElementById("Player player" + playersTurn).style.backgroundColor = "white";
+    document.getElementById("col" + playersTurn).style.backgroundColor = "white";
 }
 // sets the player whos turn it was back to none  
 // currently functioning as designed below
 function removeColor(playersTurn)
 {   
-    //document.getElementsByClassName("col " + playersTurn) ById("Player player" + playersTurn).removeAttribute(style);
+    document.getElementById("col" + playersTurn).style.backgroundColor = "greenyellow";
 }
 
 // changes which players turn it is for score and for indicator
@@ -351,7 +349,8 @@ function playerTurn(){
     alert("player changed");    
     removeColor(playersTurn);
     setScore(playersTurn);
-    if(playersTurn == 3){
+    alert(players);
+    if(playersTurn == players){
         playersTurn = 1;
     }
     else{
@@ -361,6 +360,11 @@ function playerTurn(){
     setColor(playersTurn);
     dieRoll = 0;
 
+    document.getElementById("keptdie1").setAttribute("hidden", true);
+    document.getElementById("keptdie2").setAttribute("hidden", true);
+    document.getElementById("keptdie3").setAttribute("hidden", true);
+    document.getElementById("keptdie4").setAttribute("hidden", true);
+    document.getElementById("keptdie5").setAttribute("hidden", true);
 
 }
 
@@ -464,7 +468,7 @@ function tallyScoreTotal(upper, lower){
 function whoWon(totalArray){
     document.getElementById("main").setAttribute("hidden", true);
     document.getElementById("winners").removeAttribute("hidden");
-    if(players >= 1){
+    if(players == 1){
         document.getElementById("winners").removeAttribute("hidden");
         document.getElementById("if").removeAttribute("hidden");
         document.getElementById("winner").value = userTotal;
@@ -478,12 +482,6 @@ function whoWon(totalArray){
             document.getElementById("winner").value = player2Name;
         }
     }
-
-    // array
-    // copy array
-    // sort copy
-    // if copy[i] = array
-    //  then player[i] is in place [i]
 
     if(players >= 3){
         document.getElementById("if3").removeAttribute("hidden");
@@ -502,44 +500,15 @@ function whoWon(totalArray){
         for (let ordercomp = 0; ordercomp < players; ordercomp++) {
             if(totalArray[order] = clone[ordercomp]){
                 var winner = totalArray[order];            
-            }
-            
+            }        
         }
     }
     
-    
     var second;
     var third;
-    var fourth;
-    
-    //for (let winner = 0; index < players; index++) {
-        
-    //}
-    
+    var fourth;  
 }
-
-// to do list
-// make a box to show whos turn it is each turn
-// make game code
-// clean code
-// design game better visually
-// fix monitor size issues.
-// commit up more 
-// 2 arrays to sort and determine score winner??
 /*
-
-load                                X
-what is your name                   X
-validate a name was inputted        X
-do you want to play                 X
-    if not redirect to google       X
-if so then how many players         X
-enter player names                  X
-validate player names               X
-make score card                     X
-player turn                         X
-    roll                            X
-    hold                            X
     scores figure out
     update score
     change player
