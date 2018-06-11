@@ -36,55 +36,54 @@
         <main>
                 
             <div id="main">
-            <div id="toPlay">
-                <div id="yourName">What is your name?  &nbsp; &nbsp;
-                    <input type="text" id="mainUserName" class="inputs" > 
-                    <button id="sendName" onClick="verifyUserName()"> Send Name</button>
-                </div>   
+                <div id="toPlay">
+                    <div id="yourName">What is your name?  &nbsp; &nbsp;
+                        <input type="text" id="mainUserName" class="inputs" > 
+                        <button id="sendName" onClick="verifyUserName()"> Send Name</button>
+                    </div>   
                 
-                <div id="doYou" hidden> </div>   
+                    <div id="doYou" hidden> </div>   
             
-                <div id="yesNoButton" hidden><br>
-                    <button class="yesButton" onclick="loadGame()">Yes, Lets play</button>
-                    <button class="noButton" onClick="redirect()">No thanks. Send me to Google</button>    
-                </div>  
-
-            </div>
-            <div id="playerNames">
-                    <input type="text" id="playerTwoName" class="inputs" placeholder="Player 2 Name" hidden>   <br>
-                    <input type="text" id="playerThreeName" class="inputs" placeholder="Player 3 Name" hidden> <br>
-                    <input type="text" id="playerFourName" class="inputs" placeholder="Player 4 Name"  hidden> <br>
-                    <button id="sendNames" onClick="addPlayerNames()" hidden>Add Names</button>
-            </div>    
-        
-            <div id= "howMany" hidden>   
-                How Many People want to play?<br><br>
-                <button class="onePlayer" onClick="choose('1')">One Player</button>
-                <button class="twoPlayer" onClick="choose('2')">Two Players</button>
-                <button class="threePlayer" onClick="choose('3')">Three Players</button>
-                <button class="fourPlayer" onClick="choose('4')">Four Players</button>
-            </div>
-
-        
-
-            
-            <br><br><br>
-            <div id="divRoll">
-                <button class="roll" id="roll" onclick="myMove(), rollDice()" hidden>Roll Dice</button>
-                <button class="roll" id="hold" onclick=" getdies()" hidden>Hold Dice</button>
-            </div>
-            <div id ="container" hidden>
-                <div id ="animate">
-                    <img src="/images/die1.jpg" id="dicePic1"> 
-                    <img src="/images/die2.jpg" id="dicePic2"> 
-                    <img src="/images/die3.jpg" id="dicePic3"> 
-                    <img src="/images/die4.jpg" id="dicePic4"> 
-                    <img src="/images/die5.jpg" id="dicePic5"> 
-                    <img src="/images/die6.jpg" id="dicePic6"> 
+                    <div id="yesNoButton" hidden><br>
+                        <button class="yesButton" onclick="loadGame()">Yes, Lets play</button>
+                        <button class="noButton" onClick="redirect()">No thanks. Send me to Google</button>    
+                    </div>  
 
                 </div>
+                <div id="playerNames">
+                        <input type="text" id="playerTwoName" class="inputs" placeholder="Player 2 Name" hidden>   <br>
+                        <input type="text" id="playerThreeName" class="inputs" placeholder="Player 3 Name" hidden> <br>
+                        <input type="text" id="playerFourName" class="inputs" placeholder="Player 4 Name"  hidden> <br>
+                        <button id="sendNames" onClick="addPlayerNames()" hidden>Add Names</button>
+                </div>    
+            
+                <div id= "howMany" hidden>   
+                    How Many People want to play?<br><br>
+                    <button class="onePlayer" onClick="choose('1')">One Player</button>
+                    <button class="twoPlayer" onClick="choose('2')">Two Players</button>
+                    <button class="threePlayer" onClick="choose('3')">Three Players</button>
+                    <button class="fourPlayer" onClick="choose('4')">Four Players</button>
+                </div>
+            
+                <br><br><br>
+                <div id="divRoll">
+                    <button class="roll" id="roll" onclick="myMove(), rollDice()" hidden>Roll Dice</button>
+                    <button class="roll" id="hold" onclick=" getdies()" hidden>Hold Dice</button>
+                </div>
+                <div id ="container" hidden>
+                    <div id ="animate">
+                        <img src="/images/die1.jpg" id="dicePic1"> 
+                        <img src="/images/die2.jpg" id="dicePic2"> 
+                        <img src="/images/die3.jpg" id="dicePic3"> 
+                        <img src="/images/die4.jpg" id="dicePic4"> 
+                        <img src="/images/die5.jpg" id="dicePic5"> 
+                        <img src="/images/die6.jpg" id="dicePic6"> 
+
+                    </div>
+                </div>
             </div>
-            </div>
+
+
         </main>
         <article id="winners" hidden>
             <table >
@@ -239,7 +238,26 @@
                     <input type="image" id="keptdie5" src="" class="die" style="width: 50px;" hidden>
                 
                 </div>
+
+ 
             </div>
+
+            <div id="scoreButtons" ><br>
+                <button id="Aces" onclick="Aces()" hidden>Aces</button>
+                <button id="Twos" onclick="Twos()" hidden>Twos</button>
+                <button id="Threes" onclick="Threes()" hidden>Threes</button>
+                <button id="Fours" onclick="Fours()" hidden>Fours</button>
+                <button id="Fives" onclick="Fives()" hidden>Fives</button>
+                <button id="Sixes" onclick="Sixes()" hidden>Sixes</button>
+                <button id="Full House" onclick="FullHouse()" hidden>Full House</button>
+                <button id="3 of Kind" onclick="Kind3()" hidden>3 of Kind</button>
+                <button id="4 of Kind" onclick="Kind4()" hidden>4 of Kind</button>
+                <button id="Small Straight" onclick="SmallStraight()" hidden>Small Straight</button>
+                <button id="Large Straight" onclick="LargeStraight()" hidden>Large Straight</button>
+                <button id="Chance" onclick="Chance()" hidden>Chance</button>
+                <button id="Yatzy" onclick="Yatzy()" hidden>Yatzy</button>
+
+            </div> 
             <!-- following divs contaiiner and animate for dic rolling-->
             
         </section>

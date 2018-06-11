@@ -216,8 +216,10 @@ function hold(){
 
 function turnScore(dieScore){
     dieScore.sort();
+    singles(dieScore);
+
+
     var scoresString = dieScore.join('');
-    
     var uniqueNums = [];
     $.each(dieScore, function(i, el){
         if($.inArray(el, uniqueNums) === -1) uniqueNums.push(el);
@@ -269,6 +271,7 @@ function turnScore(dieScore){
        // var ss = document.getElementById("Small Straight " + player);
        // var ssInfo = document.createTextNode("40");
        // ss.appendChild(ssInfo);alert("Small Straight");
+       //document.getElementById("Small Straight").removeAttribute(hidden);
         alert("Small Straight");
     }
 
@@ -296,38 +299,72 @@ function turnScore(dieScore){
         // alert(chanceTotal); calculates just needs to insert score 
     }
     
-    playerTurn();
+    //playerTurn();
 }
+//  this set of stuff is for single score population in screen 
+
+var sumOnes = 0;
+var sumTwos = 0;
+var sumThrees = 0;
+var sumFours = 0;
+var sumFives = 0;
+var sumSixes = 0;
+
+var singleScoressArray = [0,0,0,0,0];
+function singles(dieScore){
+    
+    var singlesArray = [1, 2, 3, 4, 5, 6 ];
+    for(var singlesScore = 0; singlesScore < dieScore.length; singlesScore++){
+        for(var scoreType = 0; scoreType < singlesArray.length; scoreType++){
+            console.log(dieScore[singlesScore]); // for testing
+            if(dieScore[singlesScore] == singlesArray[scoreType]){
+                singleScoressArray[singlesScore] += 1;
+            }
+        }
+    }
+    alert(singleScoressArray); // for testing
+
+    categoryUpperArray = ["Aces", "Twos","Threes","Fours","Fives","Sixes","Total Score","Bonus",
+            "Total", "Upper Total","Grand Total"];
+
+    for(displaySingles = 0; displaySingles < singleScoressArray.length; displaySingles++){
+        if(singleScoressArray[displaySingles] > 0){
+            document.getElementById(categoryUpperArray[displaySingles]).removeAttribute("hidden");
+            document.getElementById(categoryUpperArray[displaySingles] + " player " + playersTurn).value = singleScoressArray[displaySingles];
+        }
+    }
+    
+}
+
 
 
 // get the dies for diescore and makes an array of the dice rolled
 
 function getdies(){
-    var dieSource = [document.getElementById("keptdie1").src, document.getElementById("keptdie2").src,document.getElementById("keptdie3").src,
+    var dieSource = [document.getElementById("keptdie1").src, document.getElementById("keptdie2").src, document.getElementById("keptdie3").src,
                      document.getElementById("keptdie4").src, document.getElementById("keptdie5").src];
     var dieScore = [];
-    for (let die = 0; die < dieSource.length; die++) {
-        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy//images/die1.jpg"){
+    for (var die = 0; die < dieSource.length; die++) {
+        if(dieSource[die] == "http://127.0.0.1:5500/die1.jpg"){
             dieScore[die] = 1;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die2.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/images/die2.jpg"){
             dieScore[die] = 2;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die3.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/images/die3.jpg"){
             dieScore[die] = 3;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die4.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/images/die4.jpg"){
             dieScore[die] = 4;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die5.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/images/die5.jpg"){
             dieScore[die] = 5;
         }    
-        if(dieSource[die] == "http://127.0.0.1:5500/Yatzy/images/die6.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/images/die6.jpg"){
             dieScore[die] = 6;
         }    
     }
     // dieScore contains the 5 dies held
-    // alert(dieScore);
     turnScore(dieScore);
 }
 
@@ -349,7 +386,7 @@ function playerTurn(){
     alert("player changed");    
     removeColor(playersTurn);
     setScore(playersTurn);
-    alert(players);
+    
     if(playersTurn == players){
         playersTurn = 1;
     }
@@ -400,10 +437,7 @@ function moveDie(id){
             die = die.replace("kept", "");
         }
         document.getElementById(die).src = document.getElementById(keptdie).src;
-        console.log(die);
-        //alert("WORKS");
         document.getElementById(die).removeAttribute("hidden");
-        //alert("dont work");
         document.getElementById(keptdie).setAttribute("hidden", true);
         document.getElementById(keptdie).removeAttribute("data-held");
         
@@ -412,7 +446,7 @@ function moveDie(id){
 
 
 function gameOver(){
-    for (let upperLoop = 0; index < players; upperLoop++) {
+    for (let upperLoop = 0; upperLoop < players; upperLoop++) {
         var playerUpperScore = tallyScoreUpper();      
         document.getElementById("Total Score player " + upperLoop).value = playerUpperScore;    
            
