@@ -102,3 +102,11 @@ footer{
   font-weight: bolder;
   font: 16px;
 }
+
+.scoresCenter{
+  text-align: center;
+}
+
+.scoresRight{
+  text-align: right;
+}
