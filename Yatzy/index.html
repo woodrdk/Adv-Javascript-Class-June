@@ -243,19 +243,26 @@
             </div>
 
             <div id="scoreButtons" ><br>
-                <button id="Aces" onclick="Aces()" hidden>Aces</button>
-                <button id="Twos" onclick="Twos()" hidden>Twos</button>
-                <button id="Threes" onclick="Threes()" hidden>Threes</button>
-                <button id="Fours" onclick="Fours()" hidden>Fours</button>
-                <button id="Fives" onclick="Fives()" hidden>Fives</button>
-                <button id="Sixes" onclick="Sixes()" hidden>Sixes</button>
-                <button id="Full House" onclick="FullHouse()" hidden>Full House</button>
-                <button id="3 of Kind" onclick="Kind3()" hidden>3 of Kind</button>
-                <button id="4 of Kind" onclick="Kind4()" hidden>4 of Kind</button>
-                <button id="Small Straight" onclick="SmallStraight()" hidden>Small Straight</button>
-                <button id="Large Straight" onclick="LargeStraight()" hidden>Large Straight</button>
-                <button id="Chance" onclick="Chance()" hidden>Chance</button>
-                <button id="Yatzy" onclick="Yatzy()" hidden>Yatzy</button>
+                <table>
+                    <tr>
+                        <td><button class="hideButtons" id="AcesButton" onclick="Aces()" hidden>Aces</button></td>              
+                        <td><button id="TwosButton" onclick="Twos()" hidden>Twos</button></td></td>
+                        <td><button id="ThreesButton" onclick="Threes()" hidden>Threes</button></td>
+                        <td><button id="FoursButton" onclick="Fours()" hidden >Fours</button></td>
+                        <td><button id="FivesButton" onclick="Fives()" hidden>Fives</button></td>
+                        <td><button id="SixesButton" onclick="Sixes()" hidden>Sixes</button></td>
+                    </tr>
+                    <tr>
+                        <td><button class="hideButtons" id="FullHouseButton" onclick="FullHouse()" hidden>Full House</button></td>
+                        <td><button class="hideButtons" id="3ofKindButton" onclick="Kind3()" hidden>3 of Kind</button></td>
+                        <td><button class="hideButtons" id="4ofKindButton" onclick="Kind4()" hidden >4 of Kind</button></td>
+
+                        <td><button class="hideButtons" id="SmallStraightButton" onclick="SmallStraight()" hidden >Small Straight</button></td>
+                        <td><button class="hideButtons" id="LargeStraightButton" onclick="LargeStraight()" hidden>Large Straight</button></td>
+                        <td><button class="hideButtons" id="ChanceButton" onclick="Chance()" hidden >Chance</button></td>
+                        <td><button class="hideButtons" id="YatzyButton" onclick="Yatzy()" hidden >Yatzy</button></td>
+                    </tr>
+                </table>
 
             </div> 
             <!-- following divs contaiiner and animate for dic rolling-->

@@ -57,6 +57,11 @@ table, th, td {
   
 } 
 
+#scorebuttons{
+  float: right;
+  margin-left: auto;
+  margin-right: auto;
+}
 #diced{
   background-color: black;
   color: white;

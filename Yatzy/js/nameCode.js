@@ -1,16 +1,29 @@
-var diceImage = ["die1.jpg", "die2.jpg","die3.jpg", "die4.jpg", "die5.jpg", "die6.jpg"];
-var player2Name;
-var player3Name;
-var player4Name;
-var players;
-var namesArray = [];
-var categoryArray = [];
-var scoreTotal = 0;
-var playerScoreTotal = [];
-var playerArray = [];
+
+var diceImage = ["die1.jpg", "die2.jpg","die3.jpg", "die4.jpg", "die5.jpg", "die6.jpg"]; // array of image code for the dice images
+var player2Name;        // player 2s name inputted in the text box
+var player3Name;        // player 3s name inputted in the text box
+var player4Name;        // player 4s name inputted in the text box
+var players;            // how many players
+var namesArray = [];    // array of the players names
+var categoryArray = []; // array containing the names of the categories of scoring
+var scoreTotal = 0;     // score total ? not sure if used at present
+var playerScoreTotal = [];  // player score total array containing all players scores
+var playerArray = [];   
 var totalArray = [];
-var playersTurn = 1;
-var dieRoll = 0;
+var playersTurn = 1;    // which players turn it is 1 - 4
+var dieRoll = 0;        // how many rolls have been made
+var playersTurnCount = 0;   // total players turns made to count for the game ending
+
+/////////////////////// scores for the single digits 1 - 6
+var chanceTotal = 0;   
+var onesTotal = 0;
+var twosTotal = 0;
+var threesTotal = 0;
+var foursTotal = 0;
+var fivesTotal = 0;
+var sixesTotal = 0;
+///////////////////////
+
 
 // onload preperation
 // currently functioning as designed below
@@ -211,22 +224,61 @@ function rollDice(){
 }
 
 function hold(){
+    if(playersTurnCount == (13 * players)){
+        gameOver();
+    }
+        
     getdies();
 }
 
 function turnScore(dieScore){
     dieScore.sort();
-    singles(dieScore);
+    for(var singlesScore = 0; singlesScore < dieScore.length; singlesScore++){
+        if(dieScore[singlesScore] == 1 ){
+            onesTotal += 1;            
+        }
+        if(dieScore[singlesScore] == 2 ){
+            twosTotal += 2;            
+        }
+        if(dieScore[singlesScore] == 3 ){
+            threesTotal += 3;     
+            console.log(threesTotal);       
+        }
+        if(dieScore[singlesScore] == 4 ){
+            foursTotal += 4;            
+        }
+        if(dieScore[singlesScore] == 5 ){
+            fivesTotal += 5;            
+        }
+        if(dieScore[singlesScore] == 6 ){
+            sixesTotal += 6;            
+        }
 
+    }
+    singleScoressArray = [ onesTotal, twosTotal, threesTotal, foursTotal, fivesTotal, sixesTotal ];
+
+    categoryUpperArray = ["Aces", "Twos","Threes","Fours","Fives","Sixes","Total Score","Bonus",
+            "Total", "Upper Total","Grand Total"];
+
+    for(displaySingles = 0; displaySingles < singleScoressArray.length; displaySingles++){
+        if(singleScoressArray[displaySingles] > 0){
+            document.getElementById(categoryUpperArray[displaySingles] + "Button").removeAttribute("hidden");
+
+            //document.getElementById(categoryUpperArray[displaySingles] + " player " + playersTurn).value = singleScoressArray[displaySingles];
+        }
+    }
 
     var scoresString = dieScore.join('');
     var uniqueNums = [];
+
     $.each(dieScore, function(i, el){
         if($.inArray(el, uniqueNums) === -1) uniqueNums.push(el);
     });
     
     var uniqueScores = uniqueNums.join('');
-        
+    alert(uniqueScores);    
+
+    ////////////////////////////////////////////////////////////////////// 3 of kind
     var threeOfKind = false;
     var kind3Total = 0;
     threeOfKind = /(\d{1})\1\1/.test(scoresString);
@@ -234,11 +286,13 @@ function turnScore(dieScore){
         
         for(kind3 = 0; kind3 < 5; kind3++){
             kind3Total += dieScore[kind3];
-        }
+        }// refactor this for 3 kind 4 kind and chance 
+        document.getElementById("3ofKindButton").removeAttribute("hidden");
         alert("three of kind");
         alert(kind3Total);
     }
-
+     
+    /////////////////////////////////////////////////////////////////////// 4 of kind
 
     var fourOfKind = false;
     var kind4Total = 0;
@@ -247,96 +301,104 @@ function turnScore(dieScore){
         for(kind4 = 0; kind4 < 5; kind4++){
             kind4Total += dieScore[kind4];
         }
-        alert("four of kind");
-        alert(kind4Total);
+        document.getElementById("4ofKindButton").removeAttribute("hidden");
     }
 
-    // not working yet
+    ///////////////////////////////////////////////////////////////////////////// full house
     var fullHouse = false;
     fullHouse = /(\d{1})\1/.test(scoresString) && /(\d{1})\1\1/.test(scoresString);
     if(fullHouse == true){
-        alert("FUll HOUSE");
+        document.getElementById("FullHouseButton").removeAttribute("hidden");
     }
 
+    ///////////////////////////////////////////////////////////////////////// yatzy
     var yatzyScore = false;
     if(uniqueScores.length == 1){
-        alert("yatzy");
+        document.getElementById("YatzyButton").removeAttribute("hidden");
     }
 
+    ///////////////////////////////////////////////////////////////////////// small straight
     var smallS = false;
-    if(uniqueScores == "1234" || uniqueScores == "2345" || uniqueScores == "3456" ){
-        smallS = true;
-    }
-    if (smallS == true) {
-       // var ss = document.getElementById("Small Straight " + player);
-       // var ssInfo = document.createTextNode("40");
-       // ss.appendChild(ssInfo);alert("Small Straight");
-       //document.getElementById("Small Straight").removeAttribute(hidden);
-        alert("Small Straight");
+    if (uniqueScores == "12345" || uniqueScores == "23456" ) {
+        document.getElementById("LargeStraightButton").removeAttribute("hidden");
+        document.getElementById("SmallStraightButton").removeAttribute("hidden");
     }
 
+    if (uniqueScores == "1234" || uniqueScores == "2345" || uniqueScores == "3456" ) {
+        document.getElementById("SmallStraightButton").removeAttribute("hidden");
+    }
+    
+
+    ///////////////////////////////////////////////////////////// large straight
     var largeS = false;
-    if(uniqueScores == "12345" || uniqueScores == "23456"){
-        largeS = true;
-    }
-    else if (largeS == true) {
-        //var ls = document.getElementById("Large Straight " + player);
-        //var lsInfo = document.createTextNode("40");
-        //ss.appendChild(ssInfo);alert("Large Straight");
-        alert("large straight");
-    }
-    // chance section of scoring working as coded needs to append to score board
-
+    //&& document.getElementById("Large Straight player " + playersTurn).value == " "
+    
+    
+    /////////////////////////////////////////////////////////// chance
     var chance = true;
-    var chanceTotal = 0;
+
     if(chance == true){
         for(chanceLoop = 0; chanceLoop < 5; chanceLoop++){
             chanceTotal += dieScore[chanceLoop];
         }
-        //var chanceLocation = document.getElementById("Chance player " + player);
-        //var chanceInfo = document.createTextNode(chanceTotal);
-        //chanceLocation.appendChild(chanceInfo);
-        // alert(chanceTotal); calculates just needs to insert score 
+        document.getElementById("ChanceButton").removeAttribute("hidden");
     }
     
-    //playerTurn();
-}
-//  this set of stuff is for single score population in screen 
 
-var sumOnes = 0;
-var sumTwos = 0;
-var sumThrees = 0;
-var sumFours = 0;
-var sumFives = 0;
-var sumSixes = 0;
-
-var singleScoressArray = [0,0,0,0,0];
-function singles(dieScore){
-    
-    var singlesArray = [1, 2, 3, 4, 5, 6 ];
-    for(var singlesScore = 0; singlesScore < dieScore.length; singlesScore++){
-        for(var scoreType = 0; scoreType < singlesArray.length; scoreType++){
-            console.log(dieScore[singlesScore]); // for testing
-            if(dieScore[singlesScore] == singlesArray[scoreType]){
-                singleScoressArray[singlesScore] += 1;
-            }
-        }
-    }
-    alert(singleScoressArray); // for testing
-
-    categoryUpperArray = ["Aces", "Twos","Threes","Fours","Fives","Sixes","Total Score","Bonus",
-            "Total", "Upper Total","Grand Total"];
-
-    for(displaySingles = 0; displaySingles < singleScoressArray.length; displaySingles++){
-        if(singleScoressArray[displaySingles] > 0){
-            document.getElementById(categoryUpperArray[displaySingles]).removeAttribute("hidden");
-            document.getElementById(categoryUpperArray[displaySingles] + " player " + playersTurn).value = singleScoressArray[displaySingles];
-        }
-    }
-    
 }
 
-
+function Aces(){
+    document.getElementById("Aces player " + playersTurn).innerHTML = onesTotal;
+    playerTurn();
+}
+function Twos(){
+    document.getElementById("Twos player " + playersTurn).innerHTML = twosTotal;
+    playerTurn();
+}
+function Threes(){
+    document.getElementById("Threes player " + playersTurn).innerHTML = threesTotal;
+    playerTurn();
+}
+function Fours(){
+    document.getElementById("Fours player " + playersTurn).innerHTML = foursTotal;
+    playerTurn();
+}
+function Fives(){
+    document.getElementById("Fives player " + playersTurn).innerHTML = fivesTotal;
+    playerTurn();
+}
+function Sixes(){
+    document.getElementById("Sixes player " + playersTurn).innerHTML = sixesTotal;
+    playerTurn();
+}
+function Chance(){
+    document.getElementById("Chance player " + playersTurn).innerHTML = chanceTotal;
+    playerTurn();
+}
+function FullHouse(){
+    document.getElementById("Full House player " + playersTurn).innerHTML = "25";
+    playerTurn();
+}
+function Yatzy(){
+    document.getElementById("Yatzy player " + playersTurn).innerHTML = "50";
+    playerTurn();
+}
+function SmallStraight(){
+    document.getElementById("Small Straight player " + playersTurn).innerHTML = "30";
+    playerTurn();
+}
+function LargeStraight(){
+    document.getElementById("Large Straight player " + playersTurn).innerHTML = "40";
+    playerTurn();
+}
+function Kind4(){
+    document.getElementById("4 of a kind player " + playersTurn).innerHTML = chanceTotal;
+    playerTurn();
+}
+function Kind3(){
+    document.getElementById("3 of a kind player " + playersTurn).innerHTML = chanceTotal;
+    playerTurn();
+}
 
 // get the dies for diescore and makes an array of the dice rolled
 
@@ -345,7 +407,7 @@ function getdies(){
                      document.getElementById("keptdie4").src, document.getElementById("keptdie5").src];
     var dieScore = [];
     for (var die = 0; die < dieSource.length; die++) {
-        if(dieSource[die] == "http://127.0.0.1:5500/die1.jpg"){
+        if(dieSource[die] == "http://127.0.0.1:5500/images/die1.jpg"){
             dieScore[die] = 1;
         }    
         if(dieSource[die] == "http://127.0.0.1:5500/images/die2.jpg"){
@@ -370,14 +432,12 @@ function getdies(){
 
 // sets the player whos turn it is to white 
 // currently functioning as designed below
-function setColor(playersTurn)
-{   
+function setColor(playersTurn){   
     document.getElementById("col" + playersTurn).style.backgroundColor = "white";
 }
 // sets the player whos turn it was back to none  
 // currently functioning as designed below
-function removeColor(playersTurn)
-{   
+function removeColor(playersTurn){   
     document.getElementById("col" + playersTurn).style.backgroundColor = "greenyellow";
 }
 
@@ -385,8 +445,7 @@ function removeColor(playersTurn)
 function playerTurn(){
     alert("player changed");    
     removeColor(playersTurn);
-    setScore(playersTurn);
-    
+        
     if(playersTurn == players){
         playersTurn = 1;
     }
@@ -403,11 +462,33 @@ function playerTurn(){
     document.getElementById("keptdie4").setAttribute("hidden", true);
     document.getElementById("keptdie5").setAttribute("hidden", true);
 
-}
+    // document.getElementsByClassName("hideButtons").setAttribute("hidden", true); why wont this work?
+    // next group of lines hides the turn buttons
+    document.getElementById("AcesButton").setAttribute("hidden", true);
+    document.getElementById("TwosButton").setAttribute("hidden", true);
+    document.getElementById("ThreesButton").setAttribute("hidden", true);
+    document.getElementById("FoursButton").setAttribute("hidden", true);
+    document.getElementById("FivesButton").setAttribute("hidden", true);
+    document.getElementById("SixesButton").setAttribute("hidden", true);
+    document.getElementById("FullHouseButton").setAttribute("hidden", true);
+    document.getElementById("3ofKindButton").setAttribute("hidden", true);
+    document.getElementById("4ofKindButton").setAttribute("hidden", true);
+    document.getElementById("SmallStraightButton").setAttribute("hidden", true);
+    document.getElementById("LargeStraightButton").setAttribute("hidden", true);
+    document.getElementById("ChanceButton").setAttribute("hidden", true);
+    document.getElementById("YatzyButton").setAttribute("hidden", true);
 
-// needs finished
-function setScore(playersTurn){
-    // need to set the score that is clicked to the actual box and delete the other possible ones 
+    chanceTotal = 0;
+    onesTotal = 0;
+    twosTotal = 0;
+    threesTotal = 0;
+    foursTotal = 0;
+    fivesTotal = 0;
+    sixesTotal = 0;
+
+    playersTurnCount++;
+    alert(playersTurnCount);
+    alert(playersTurnCount * players);
 }
 
 function moveDie(id){
@@ -420,7 +501,6 @@ function moveDie(id){
     }
     
     var die = id;
-  
     var held = document.getElementById(die).getAttribute("data-held");
     var dataHeld = document.getElementById(keptdie).getAttribute("data-held");
   
@@ -443,7 +523,6 @@ function moveDie(id){
         
     }
 }
-
 
 function gameOver(){
     for (let upperLoop = 0; upperLoop < players; upperLoop++) {
