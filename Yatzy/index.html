@@ -88,24 +88,24 @@
         <article id="winners" hidden>
             <table >
                 <tr id="if" hidden>
-                    <td ><img src="images/trophy.png" alt="trophy"></td>
+                    <td ><img src="images/trophy.png" class = "trophys" alt="trophy"></td>
                     <td id="winner"></td>
                 </tr>
                     
                 <tr id="if2" hidden>
-                    <td><img src="images/2nd.jpg" alt="second place trophy"></td>
+                    <td><img src="images/2nd.jpg" class = "trophys" alt="second place trophy"></td>
                     <td id="1stPlace"></td>
                     
                 </tr>
                 
                 <tr id="if3" hidden>
-                    <td><img src="images/3rd.jpg" alt="3rd place trophy"></td>
+                    <td><img src="images/3rd.jpg" class = "trophys" alt="3rd place trophy"></td>
                     <td id="2ndPlace"></td>
                     
                 </tr>
 
-                <tr id="if4" hidden>
-                    <td><img src="images/4th.png" alt="4th place ribbon"></td>
+                <tr id="if4" hidden >
+                    <td><img src="images/4th.png" class = "fourth" alt="4th place ribbon"></td>
                     <td id="4thPlace"></td>
                 </tr>
 
@@ -158,7 +158,7 @@
                     </tr>
 
                     <tr id="Bonus">
-                        <th>Bonus (if total score > 63)</th>
+                        <th class="scoresCenter">Bonus (if total score > 63)</th>
                     </tr>
 
                     <tr id="Total">
@@ -198,7 +198,7 @@
                     </tr>
 
                     <tr id="Double Yatzy">
-                        <th class="scoresCenter">Double Yatzy</th>
+                        <th class="scoresCenter">Double Yatzy COMING SOON</th>
                     </tr>
 
                     <tr id="Lower Total">
@@ -242,28 +242,28 @@
  
             </div>
 
-            <div id="scoreButtons" ><br>
+            <div id="scoreButtons" hidden ><br>
                 <table>
                     <tr>
-                        <td><button class="hideButtons" id="AcesButton" onclick="Aces()" hidden>Aces</button></td>              
-                        <td><button id="TwosButton" onclick="Twos()" hidden>Twos</button></td></td>
-                        <td><button id="ThreesButton" onclick="Threes()" hidden>Threes</button></td>
-                        <td><button id="FoursButton" onclick="Fours()" hidden >Fours</button></td>
-                        <td><button id="FivesButton" onclick="Fives()" hidden>Fives</button></td>
-                        <td><button id="SixesButton" onclick="Sixes()" hidden>Sixes</button></td>
+                        <td><button id="AcesButton" onclick="Aces()" >Aces</button></td>              
+                        <td><button id="TwosButton" onclick="Twos()" >Twos</button></td></td>
+                        <td><button id="ThreesButton" onclick="Threes()" >Threes</button></td>
+                        <td><button id="FoursButton" onclick="Fours()"  >Fours</button></td>
+                        <td><button id="FivesButton" onclick="Fives()" >Fives</button></td>
+                        <td><button id="SixesButton" onclick="Sixes()" >Sixes</button></td>
                     </tr>
                     <tr>
-                        <td><button class="hideButtons" id="FullHouseButton" onclick="FullHouse()" hidden>Full House</button></td>
-                        <td><button class="hideButtons" id="3ofKindButton" onclick="Kind3()" hidden>3 of Kind</button></td>
-                        <td><button class="hideButtons" id="4ofKindButton" onclick="Kind4()" hidden >4 of Kind</button></td>
+                        <td><button id="FullHouseButton" onclick="FullHouse()" >Full House</button></td>
+                        <td><button id="3ofKindButton" onclick="Kind3()" >3 of Kind</button></td>
+                        <td><button id="4ofKindButton" onclick="Kind4()"  >4 of Kind</button></td>
 
-                        <td><button class="hideButtons" id="SmallStraightButton" onclick="SmallStraight()" hidden >Small Straight</button></td>
-                        <td><button class="hideButtons" id="LargeStraightButton" onclick="LargeStraight()" hidden>Large Straight</button></td>
-                        <td><button class="hideButtons" id="ChanceButton" onclick="Chance()" hidden >Chance</button></td>
-                        <td><button class="hideButtons" id="YatzyButton" onclick="Yatzy()" hidden >Yatzy</button></td>
+                        <td><button id="SmallStraightButton" onclick="SmallStraight()"  >Small Straight</button></td>
+                        <td><button id="LargeStraightButton" onclick="LargeStraight()" >Large Straight</button></td>
+                        <td><button id="ChanceButton" onclick="Chance()"  >Chance</button></td>
+                        <td><button id="YatzyButton" onclick="Yatzy()"  >Yatzy</button></td>
                     </tr>
+                    <tr>  Points can be awarded if the button is red.</tr>
                 </table>
-
             </div> 
             <!-- following divs contaiiner and animate for dic rolling-->
             

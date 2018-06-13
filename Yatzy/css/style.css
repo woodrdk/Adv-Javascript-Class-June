@@ -96,7 +96,14 @@ table, th, td {
 .onePlayer, .twoPlayer, .threePlayer, .fourPlayer{
   border-radius: 10px;
 }
-
+.trophys{
+  height: 15%;
+  width: 15%;
+}
+.fourth{
+  width: 12.5%;
+  height: 25%;
+}
 footer{
   padding: 15px;
   font-weight: bolder;
@@ -109,4 +116,9 @@ footer{
 
 .scoresRight{
   text-align: right;
+}
+
+article{
+  float: right;
+  clear: both;
 }

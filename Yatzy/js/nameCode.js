@@ -154,6 +154,7 @@ function makeScoreCard(players){
             var text = document.createTextNode("");
             var category = document.getElementById(categoryArray[i]);
             th.id = categoryArray[i] + " player " + (g+1);
+            th.classList.add("scoresCenter");
             if(i == 0 ){
                 th.appendChild(playerTxt);
                 th.style.padding="10px";
@@ -201,6 +202,26 @@ function rollDice(){
 
 function hold(){
     getdies();   
+    document.getElementById("scoreButtons").removeAttribute("hidden");
+    Points();
+
+}
+
+function Points(){
+    var x = document.querySelectorAll(".Points");
+    for (var i = 0; i < x.length; i++) {
+        x[i].style.backgroundColor = "red";
+        x[i].style.color = "white";
+    }
+}
+
+///// need this to work
+function removePoints(){
+    var y = document.querySelectorAll(".Points");
+    
+    for (var bye = 0; bye < y.length; bye++) {
+        y[bye].classList.toggle("points");
+    }
 }
 
 function turnScore(dieScore){
@@ -232,7 +253,7 @@ function turnScore(dieScore){
 
     for(displaySingles = 0; displaySingles < singleScoressArray.length; displaySingles++){
         if(singleScoressArray[displaySingles] > 0){
-            document.getElementById(categoryUpperArray[displaySingles] + "Button").removeAttribute("hidden");
+            document.getElementById(categoryUpperArray[displaySingles] + "Button").classList.add("Points");
 
             //document.getElementById(categoryUpperArray[displaySingles] + " player " + playersTurn).value = singleScoressArray[displaySingles];
         }
@@ -256,7 +277,7 @@ function turnScore(dieScore){
         for(kind3 = 0; kind3 < 5; kind3++){
             kind3Total += dieScore[kind3];
         }// refactor this for 3 kind 4 kind and chance 
-        document.getElementById("3ofKindButton").removeAttribute("hidden");
+        document.getElementById("3ofKindButton").classList.add("Points");
     }
      
     /////////////////////////////////////////////////////////////////////// 4 of kind
@@ -268,31 +289,31 @@ function turnScore(dieScore){
         for(kind4 = 0; kind4 < 5; kind4++){
             kind4Total += dieScore[kind4];
         }
-        document.getElementById("4ofKindButton").removeAttribute("hidden");
+        document.getElementById("4ofKindButton").classList.add("Points");
     }
 
     ///////////////////////////////////////////////////////////////////////////// full house
     var fullHouse = false;
     fullHouse = /(\d{1})\1/.test(scoresString) && /(\d{1})\1\1/.test(scoresString);
     if(fullHouse == true){
-        document.getElementById("FullHouseButton").removeAttribute("hidden");
+        document.getElementById("FullHouseButton").classList.add("Points");
     }
 
     ///////////////////////////////////////////////////////////////////////// yatzy
     var yatzyScore = false;
     if(uniqueScores.length == 1){
-        document.getElementById("YatzyButton").removeAttribute("hidden");
+        document.getElementById("YatzyButton").classList.add("Points");
     }
 
     ///////////////////////////////////////////////////////////////////////// small straight
     var smallS = false;
     if (uniqueScores == "12345" || uniqueScores == "23456" ) {
-        document.getElementById("LargeStraightButton").removeAttribute("hidden");
-        document.getElementById("SmallStraightButton").removeAttribute("hidden");
+        document.getElementById("LargeStraightButton").classList.add("Points");
+        document.getElementById("SmallStraightButton").classList.add("Points");
     }
 
     if (uniqueScores == "1234" || uniqueScores == "2345" || uniqueScores == "3456" ) {
-        document.getElementById("SmallStraightButton").removeAttribute("hidden");
+        document.getElementById("SmallStraightButton").classList.add("Points");
     }
     
 
@@ -308,10 +329,9 @@ function turnScore(dieScore){
         for(chanceLoop = 0; chanceLoop < 5; chanceLoop++){
             chanceTotal += dieScore[chanceLoop];
         }
-        document.getElementById("ChanceButton").removeAttribute("hidden");
+        document.getElementById("ChanceButton").classList.add("Points");
     }
     
-
 }
 
 function Aces(){
@@ -407,7 +427,7 @@ function removeColor(playersTurn){
 
 // changes which players turn it is for score and for indicator
 function playerTurn(){ 
-    if(playersTurnCount === (13 * players) + 1){
+    if(playersTurnCount === ((12 * players) + players - 1 )){
         gameOver();
     }
     else{
@@ -426,22 +446,8 @@ function playerTurn(){
         document.getElementById("keptdie3").setAttribute("hidden", true);
         document.getElementById("keptdie4").setAttribute("hidden", true);
         document.getElementById("keptdie5").setAttribute("hidden", true);
-
-        // next group of lines hides the turn score buttons
-        document.getElementById("AcesButton").setAttribute("hidden", true);
-        document.getElementById("TwosButton").setAttribute("hidden", true);
-        document.getElementById("ThreesButton").setAttribute("hidden", true);
-        document.getElementById("FoursButton").setAttribute("hidden", true);
-        document.getElementById("FivesButton").setAttribute("hidden", true);
-        document.getElementById("SixesButton").setAttribute("hidden", true);
-        document.getElementById("FullHouseButton").setAttribute("hidden", true);
-        document.getElementById("3ofKindButton").setAttribute("hidden", true);
-        document.getElementById("4ofKindButton").setAttribute("hidden", true);
-        document.getElementById("SmallStraightButton").setAttribute("hidden", true);
-        document.getElementById("LargeStraightButton").setAttribute("hidden", true);
-        document.getElementById("ChanceButton").setAttribute("hidden", true);
-        document.getElementById("YatzyButton").setAttribute("hidden", true);
-
+ 
+        document.getElementById("scoreButtons").setAttribute("hidden", true);
         chanceTotal = 0;
         onesTotal = 0;
         twosTotal = 0;
@@ -451,6 +457,7 @@ function playerTurn(){
         sixesTotal = 0;
 
         playersTurnCount++;
+        removePoints();
     }
 }
 
@@ -474,7 +481,7 @@ function moveDie(id){
         document.getElementById(keptdie).removeAttribute("hidden");
         
     }
-    if(dataHeld == "true"){
+    else{
         //alert(die);
         if(die.startsWith("kept")){
             die = die.replace("kept", "");
@@ -487,18 +494,12 @@ function moveDie(id){
     }
 }
 
-
-categoryArray = ["Player","Upper Section", "Aces", "Twos","Threes","Fours","Fives","Sixes","Total Score","Bonus",
-            "Total","Lower Section","Full House", "3 of a kind","4 of a kind","Small Straight","Large Straight","Yatzy","Chance","Double Yatzy","Lower Total",
-            "Upper Total","Grand Total"];
-
 function gameOver(){
     alert("game over");
     for (var upperLoop = 1; upperLoop <= players; upperLoop++) {
         var upperScoreTotal = 0;
         for(var getScore = 2; getScore < 8; getScore++){
             upperScoreTotal += parseInt(document.getElementById((categoryArray[getScore] + " player " + upperLoop)).innerText);
-            alert(upperScoreTotal);
         } 
         document.getElementById("Total Score player " + upperLoop).innerHTML = upperScoreTotal;    
            
@@ -512,20 +513,37 @@ function gameOver(){
         }
         
         var lowerScoreTotal = 0;
-        for(var getScoreLower = 12; getScoreLower < 18; getScoreLower++){
+        for(var getScoreLower = 12; getScoreLower < 19; getScoreLower++){
             lowerScoreTotal += parseInt(document.getElementById((categoryArray[getScoreLower] + " player " + upperLoop)).innerText);
         }
         document.getElementById("Lower Total player " + upperLoop).innerHTML = lowerScoreTotal; 
         document.getElementById("Grand Total player " + upperLoop).innerHTML = upperScoreTotal + lowerScoreTotal;   
-        document.getElementById("Upper Total player " + upperLoop).innerHTML = document.getElementById("Total player " + upperLoop).value;  // for Bottom upper total score
+        document.getElementById("Upper Total player " + upperLoop).innerHTML = document.getElementById("Total player " + upperLoop).innerText;  // for Bottom upper total score
           
     }  
-    userTotal = document.getElementById("Grand Total player 1").value;    
-    player2Total = document.getElementById("Grand Total player 2").value;    
-    player3Total = document.getElementById("Grand Total player 3").value;    
-    player4Total = document.getElementById("Grand Total player 4").value;    
-    totalArray = [userTotal, player2Total, player3Total, player4Total];
-    whoWon(totalArray);
+
+    switch (players)
+    {
+        case "2":
+            player2Total = document.getElementById("Grand Total player 2").value;  
+            break;
+        
+        case "3":
+            player2Total = document.getElementById("Grand Total player 2").value;  
+            player3Total = document.getElementById("Grand Total player 3").value; 
+            break;
+
+        case "4":
+            player2Total = document.getElementById("Grand Total player 2").value;  
+            player3Total = document.getElementById("Grand Total player 3").value; 
+            player4Total = document.getElementById("Grand Total player 4").value; 
+            break;
+        
+        default:
+            userTotal = document.getElementById("Grand Total player 1").value; 
+            break;
+    }  
+    whoWon();
     //
     // want to add this line of code in to have a reset button when game is won
     // <input type="button" value="Reload Page" onClick="document.location.reload(true)">
@@ -533,60 +551,240 @@ function gameOver(){
     
 }
 
-function whoWon(totalArray){
+function whoWon(){
     document.getElementById("main").setAttribute("hidden", true);
+    document.getElementById("diced").setAttribute("hidden", true);
     document.getElementById("winners").removeAttribute("hidden");
+
     if(players == 1){
         document.getElementById("winners").removeAttribute("hidden");
         document.getElementById("if").removeAttribute("hidden");
-        document.getElementById("winner").value = userTotal;
+        document.getElementById("winner").innerHTML = userName;
     }
     if(players >=2){
         document.getElementById("if2").removeAttribute("hidden");
         if (userTotal > player2Total){
-            document.getElementById("winner").value = userTotal;
+            document.getElementById("winner").innerHTML = userTotal;
         }
         else{
-            document.getElementById("winner").value = player2Name;
+            document.getElementById("winner").innerHTML = player2Name;
         }
     }
 
     if(players >= 3){
         document.getElementById("if3").removeAttribute("hidden");
-        // finish
-        
+        // finish      
     }
     if(players == 4){
         document.getElementById("if4").removeAttribute("hidden");
         // finish
 
     }
-// need to figure out how i want to determine the order of win
-    var clone = totalArray.slice(0);
-    clone.sort();
-    for (let order = 0; order < players; order++) {
-        for (let ordercomp = 0; ordercomp < players; ordercomp++) {
-            if(totalArray[order] = clone[ordercomp]){
-                var winner = totalArray[order];            
-            }        
-        }
-    }
-    
-    var second;
-    var third;
-    var fourth;  
 }
 /*
     scores figure out
     update score
-    change player
 
-when game over
-    score lower total
-    score upper total
-    game total 
-    winner screen
+    validate if has score cannot add no button
+    validate so that the buttons arent red if score already exists
+    large and small straight still get small and large when only have small?
+    final turn the leftover dice go to the kept dice
+    reset the red for old rolls? 
 
+
+    notes reference info from joe in class
+
+    var currentRoll = 0;
+var turnNumber = 0;
+var upperSectionTotal = 0;
+
+window.onload = function(){
+    document.getElementById("roll-dice").onclick = rollDice;
+
+    //set up die images onclick to toggle held
+    var dieElements = document.querySelectorAll("#dice-section>img");
+    for (var index = 0; index < dieElements.length; index++) {
+        dieElements[index].onclick = toggleDieHeld;
+    }
+
+    //set up scoreBox onclick to set score
+    var scoringElements = document.querySelectorAll("td.scorable");
+    for (let currIndex = 0; currIndex < scoringElements.length; currIndex++) {
+        scoringElements[currIndex].onclick = calcScore;
+    }
+
+    rollDice();
+}
+
+ 
+function rollDice(){
+    var dice = getDiceElements();
+    
+    for (let index = 0; index < dice.length; index++) {
+        if(isDieHeld(dice[index])){
+            continue;
+        }
+        var rollValue = getRandom();
+        dice[index].setAttribute("dice-value", rollValue);
+        setDieImage(dice[index], rollValue);
+    }
+    currentRoll++;
+    if(currentRoll == 3){
+        document.getElementById("roll-dice").setAttribute("disabled", true);
+    }
+        document.getElementById("current-roll").innerText = "Roll #" + currentRoll;       
+ 
+}
+
+
+function getDiceElements(){
+    return document.querySelectorAll("#dice-section>img");
+}
+
+function getDiceValues(){
+    var dieElements = getDiceElements();
+    var dieVals = [];
+    for (var index = 0; index < dieElements.length; index++) {
+        //get value from img element and add to array
+        dieVals.push(dieElements[index].getAttribute("dice-value"));
+    }
+    return dieVals;
+}
+
+function isDieHeld(dieElement){
+    if(dieElement.getAttribute("dice-held") == "true"){
+        return true;
+    }
+    return false;
+}
+function resetHeld(){
+    var dieElements = getDiceElements();
+    for(var i = 0; i < dieElements.length; i++){
+        dieElements[i].setAttribute("dice-held", "false");
+    }
+}
+function toggleDieHeld(){
+    var currDieElement = this;
+    if(currDieElement.getAttribute("dice-held") == "false"){
+        currDieElement.setAttribute("dice-held", "true");
+    }
+    else{
+        currDieElement.setAttribute("dice-held", "false");
+    }
+}
+
+function endTurn(){
+    currentRoll = 0;
+    turnNumber++;
+
+    if(turnNumber == 13)
+        alert("End Game here");
+
+    rollDice();
+    resetHeld();
+
+    document.getElementById("roll-dice").removeAttribute("disabled");
+}
+function getRandom(){
+    return Math.floor((Math.random() * 6) + 1);
+}
+function setDieImage(dieImageElement, rollValue){
+    switch(rollValue){
+        case 1:
+            dieImageElement.src = "/images/die1.png";
+            break;
+        case 2:
+            dieImageElement.src = "/images/die2.png";
+            break;
+        case 3:
+            dieImageElement.src = "/images/die3.png";
+            break;
+        case 4:
+            dieImageElement.src = "/images/die4.png";
+            break;
+        case 5:
+            dieImageElement.src = "/images/die5.png";
+            break;
+        case 6:
+            dieImageElement.src = "/images/die6.png";
+            break;
+    }
+}
+function calcScore(){
+    //get selected scoreBox element (the <td> that was clicked)
+    var scoreElement = this;
+
+    //ensures scoreBox is not already scored
+    if(alreadyScored(scoreElement)){
+        alert("You already chose this");
+        return;
+    }
+
+    //get the type of score and ensure it cannot be scored again
+    var scoreType = scoreElement.getAttribute("data-score");
+    scoreElement.setAttribute("already-scored", true);
+    
+    //get dice roll values
+    var diceValues = getDiceValues();
+    var score = 0;
+    switch(scoreType){
+        case "ones":
+            score = calcUpperSection(diceValues, 1);
+            displayScore(scoreElement, score);
+            upperSectionTotal += score;
+        break;
+        case "twos":
+            score = calcUpperSection(diceValues, 2);
+            displayScore(scoreElement, score);
+            upperSectionTotal += score;
+        break;
+        case "threes":
+        break;
+        case "fours":
+        break;
+        case "fives":
+        break;
+        case "sixes":
+        break;
+        case "three-of-a-kind":
+        break;
+        case "four-of-a-kind":
+        break;
+        case "small-straight":
+        break;
+        case "large-straight":
+        break;
+        case "yatzy":
+        break;
+        case "chance":
+        break;
+        case "full-house":
+        break;
+    }
+    //after score is picked end players turn
+    endTurn();
+}
+
+function calcUpperSection(diceValues, numToCheck){
+    var sum = 0;
+    for(var i = 0; i < diceValues.length; i++){
+        if(diceValues[i] == numToCheck){
+            sum += numToCheck;
+        }
+    }
+    return sum;
+}
+
+function alreadyScored(scoreElement){
+    if(scoreElement.hasAttribute("already-scored"))
+        return true;
+    return false;
+}
+
+function displayScore(scoreElement, scoreVal){
+    var displayTableData = scoreElement.nextElementSibling;
+    displayTableData.innerText = scoreVal;
+}
 */
 
 
