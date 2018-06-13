@@ -210,8 +210,8 @@ function hold(){
 function Points(){
     var x = document.querySelectorAll(".Points");
     for (var i = 0; i < x.length; i++) {
-        x[i].style.backgroundColor = "red";
-        x[i].style.color = "white";
+       // x[i].style.backgroundColor = "red";
+      //  x[i].style.color = "white";
     }
 }
 
@@ -220,7 +220,7 @@ function removePoints(){
     var y = document.querySelectorAll(".Points");
     
     for (var bye = 0; bye < y.length; bye++) {
-        y[bye].classList.toggle("points");
+        y[bye].classList.remove("Points");
     }
 }
 
