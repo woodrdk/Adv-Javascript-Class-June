@@ -203,11 +203,9 @@ function rollDice(){
 function hold(){
     getdies();   
     document.getElementById("scoreButtons").removeAttribute("hidden");
-    Points();
-
 }
 
-function Points(){
+function Points(){ // can delete after done testing
     var x = document.querySelectorAll(".Points");
     for (var i = 0; i < x.length; i++) {
        // x[i].style.backgroundColor = "red";
@@ -223,6 +221,23 @@ function removePoints(){
         y[bye].classList.remove("Points");
     }
 }
+
+function valueExists(info){
+    if(info.innerHTML == ""){
+        return false;
+    }
+    else{
+        return true;
+        
+    }
+}
+var fullHouse = false;
+var threeOfKind = false;
+var fourOfKind = false;
+var smallS = false; 
+var yatzyScore = false;
+var largeS = false;
+var chance = false;
 
 function turnScore(dieScore){
     dieScore.sort();
@@ -253,9 +268,9 @@ function turnScore(dieScore){
 
     for(displaySingles = 0; displaySingles < singleScoressArray.length; displaySingles++){
         if(singleScoressArray[displaySingles] > 0){
-            document.getElementById(categoryUpperArray[displaySingles] + "Button").classList.add("Points");
-
-            //document.getElementById(categoryUpperArray[displaySingles] + " player " + playersTurn).value = singleScoressArray[displaySingles];
+            if( valueExists(document.getElementById(categoryUpperArray[displaySingles] + " player " + (playersTurn))) == false){
+                document.getElementById(categoryUpperArray[displaySingles] + "Button").classList.add("Points");
+            }
         }
     }
 
@@ -269,7 +284,7 @@ function turnScore(dieScore){
     var uniqueScores = uniqueNums.join('');
 
     ////////////////////////////////////////////////////////////////////// 3 of kind
-    var threeOfKind = false;
+    
     var kind3Total = 0;
     threeOfKind = /(\d{1})\1\1/.test(scoresString);
     if(threeOfKind == true){
@@ -277,12 +292,15 @@ function turnScore(dieScore){
         for(kind3 = 0; kind3 < 5; kind3++){
             kind3Total += dieScore[kind3];
         }// refactor this for 3 kind 4 kind and chance 
-        document.getElementById("3ofKindButton").classList.add("Points");
+        if(valueExists(document.getElementById("3 of a kind player " + playersTurn)) == false) {
+            document.getElementById("3ofKindButton").classList.add("Points");
+        }
+
     }
      
     /////////////////////////////////////////////////////////////////////// 4 of kind
 
-    var fourOfKind = false;
+    
     var kind4Total = 0;
     fourOfKind = /(\d{1})\1\1\1/.test(scoresString);
     if(fourOfKind == true){
@@ -293,98 +311,233 @@ function turnScore(dieScore){
     }
 
     ///////////////////////////////////////////////////////////////////////////// full house
-    var fullHouse = false;
+    
     fullHouse = /(\d{1})\1/.test(scoresString) && /(\d{1})\1\1/.test(scoresString);
     if(fullHouse == true){
         document.getElementById("FullHouseButton").classList.add("Points");
     }
 
     ///////////////////////////////////////////////////////////////////////// yatzy
-    var yatzyScore = false;
+    
     if(uniqueScores.length == 1){
         document.getElementById("YatzyButton").classList.add("Points");
+        yatzyScore = true;
     }
 
     ///////////////////////////////////////////////////////////////////////// small straight
-    var smallS = false;
+    
     if (uniqueScores == "12345" || uniqueScores == "23456" ) {
         document.getElementById("LargeStraightButton").classList.add("Points");
         document.getElementById("SmallStraightButton").classList.add("Points");
+        largeS = true;
     }
 
     if (uniqueScores == "1234" || uniqueScores == "2345" || uniqueScores == "3456" ) {
         document.getElementById("SmallStraightButton").classList.add("Points");
+        smallS = true;
     }
     
 
     ///////////////////////////////////////////////////////////// large straight
-    var largeS = false;
+    
     //&& document.getElementById("Large Straight player " + playersTurn).value == " "
     
     
     /////////////////////////////////////////////////////////// chance
-    var chance = true;
+    
 
-    if(chance == true){
+    if(chance == false){
         for(chanceLoop = 0; chanceLoop < 5; chanceLoop++){
             chanceTotal += dieScore[chanceLoop];
         }
         document.getElementById("ChanceButton").classList.add("Points");
     }
     
+    
 }
 
 function Aces(){
-    document.getElementById("Aces player " + playersTurn).innerHTML = onesTotal;
-    playerTurn();
+    if(valueExists(document.getElementById("Aces player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(document.getElementById("AcesButton").className = "Points"){
+            document.getElementById("Aces player " + playersTurn).innerHTML = onesTotal;   
+        }
+        else{
+            document.getElementById("Aces player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
+    
 }
 function Twos(){
-    document.getElementById("Twos player " + playersTurn).innerHTML = twosTotal;
-    playerTurn();
+    if(valueExists(document.getElementById("Twos player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(document.getElementById("TwosButton").className = "Points"){
+            document.getElementById("Twos player " + playersTurn).innerHTML = twosTotal;   
+        }
+        else{
+            document.getElementById("Twos player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function Threes(){
-    document.getElementById("Threes player " + playersTurn).innerHTML = threesTotal;
-    playerTurn();
+    if(valueExists(document.getElementById("Threes player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(document.getElementById("ThreesButton").className = "Points"){
+            document.getElementById("Threes player " + playersTurn).innerHTML = threesTotal;   
+        }
+        else{
+            document.getElementById("Threes player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function Fours(){
-    document.getElementById("Fours player " + playersTurn).innerHTML = foursTotal;
-    playerTurn();
+    if(valueExists(document.getElementById("Fours player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(document.getElementById("FoursButton").className = "Points"){
+            document.getElementById("Fours player " + playersTurn).innerHTML = foursTotal;   
+        }
+        else{
+            document.getElementById("Fours player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function Fives(){
-    document.getElementById("Fives player " + playersTurn).innerHTML = fivesTotal;
-    playerTurn();
+    if(valueExists(document.getElementById("Fives player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(document.getElementById("FivesButton").className = "Points"){
+            document.getElementById("Fives player " + playersTurn).innerHTML = fivesTotal;   
+        }
+        else{
+            document.getElementById("Fives player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function Sixes(){
-    document.getElementById("Sixes player " + playersTurn).innerHTML = sixesTotal;
-    playerTurn();
+    if(valueExists(document.getElementById("Sixes player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(document.getElementById("SixesButton").className = "Points"){
+            document.getElementById("Sixes player " + playersTurn).innerHTML = sixesTotal;   
+        }
+        else{
+            document.getElementById("Sixes player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function Chance(){
-    document.getElementById("Chance player " + playersTurn).innerHTML = chanceTotal;
-    playerTurn();
+    if(valueExists(document.getElementById("Chance player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(chance == false){
+            document.getElementById("Chance player " + playersTurn).innerHTML = chanceTotal;
+        }
+        else{
+            document.getElementById("Chance player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function FullHouse(){
-    document.getElementById("Full House player " + playersTurn).innerHTML = "25";
-    playerTurn();
+    if(valueExists(document.getElementById("Full House player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(fullHouse == false){
+            document.getElementById("Full House player " + playersTurn).innerHTML = "0";
+        }
+        else{
+            document.getElementById("Full House player " + playersTurn).innerHTML = 25;
+        }
+        playerTurn();
+    }
 }
 function Yatzy(){
-    document.getElementById("Yatzy player " + playersTurn).innerHTML = "50";
-    playerTurn();
+    if(valueExists(document.getElementById("Yatzy player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(yatzyScore == true){
+            document.getElementById("Yatzy player " + playersTurn).innerHTML = "50";
+        }
+        else{
+            document.getElementById("Yatzy player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function SmallStraight(){
-    document.getElementById("Small Straight player " + playersTurn).innerHTML = "30";
-    playerTurn();
+    if(valueExists(document.getElementById("Small Straight player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(smallS == true){
+            document.getElementById("Small Straight player " + playersTurn).innerHTML = "30";
+        }
+        else{
+            document.getElementById("Small Straight player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function LargeStraight(){
-    document.getElementById("Large Straight player " + playersTurn).innerHTML = "40";
-    playerTurn();
+    if(valueExists(document.getElementById("Large Straight player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(largeS == true){
+            document.getElementById("Large Straight player " + playersTurn).innerHTML = "40";
+        }
+        else{
+            document.getElementById("Large Straight player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function Kind4(){
-    document.getElementById("4 of a kind player " + playersTurn).innerHTML = chanceTotal;
-    playerTurn();
+    if(valueExists(document.getElementById("4 of a kind player " + playersTurn))){
+        alert("Already have score here");
+    }
+    else{
+        if(fourOfKind == true){
+            document.getElementById("4 of a kind player " + playersTurn).innerHTML = chanceTotal;
+        }
+        else{
+            document.getElementById("4 of a kind player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 function Kind3(){
-    document.getElementById("3 of a kind player " + playersTurn).innerHTML = chanceTotal;
-    playerTurn();
+    if(valueExists(document.getElementById( "3 of a kind player " + playersTurn) ) ) {
+        alert("Already have score here");
+    }
+    else{
+        if(threeOfKind == true){
+            document.getElementById("3 of a kind player " + playersTurn).innerHTML = chanceTotal;
+        }
+        else{
+            document.getElementById("3 of a kind player " + playersTurn).innerHTML = 0;
+        }
+        playerTurn();
+    }
 }
 
             // get the dies for diescore and makes an array of the dice rolled
@@ -427,9 +580,10 @@ function removeColor(playersTurn){
 
 // changes which players turn it is for score and for indicator
 function playerTurn(){ 
-    if(playersTurnCount === ((12 * players) + players - 1 )){
+    if(playersTurnCount === (( 12 * players))){
         gameOver();
     }
+    
     else{
         removeColor(playersTurn);    
         if(playersTurn == players){
@@ -440,13 +594,11 @@ function playerTurn(){
         }
         setColor(playersTurn);
         dieRoll = 0;
-
         document.getElementById("keptdie1").setAttribute("hidden", true);
         document.getElementById("keptdie2").setAttribute("hidden", true);
         document.getElementById("keptdie3").setAttribute("hidden", true);
         document.getElementById("keptdie4").setAttribute("hidden", true);
         document.getElementById("keptdie5").setAttribute("hidden", true);
- 
         document.getElementById("scoreButtons").setAttribute("hidden", true);
         chanceTotal = 0;
         onesTotal = 0;
@@ -455,7 +607,13 @@ function playerTurn(){
         foursTotal = 0;
         fivesTotal = 0;
         sixesTotal = 0;
-
+        fullHouse = false;
+        threeOfKind = false;
+        fourOfKind = false;
+        smallS = false; 
+        yatzyScore = false;
+        largeS = false;
+        chance = false;
         playersTurnCount++;
         removePoints();
     }
@@ -469,20 +627,16 @@ function moveDie(id){
     else{
         keptdie = id;
     }
-    
     var die = id;
     var held = document.getElementById(die).getAttribute("data-held");
     var dataHeld = document.getElementById(keptdie).getAttribute("data-held");
-  
     if (held == null){
         document.getElementById(keptdie).src = document.getElementById(id).src;
         document.getElementById(id).setAttribute("hidden", true);
         document.getElementById(keptdie).setAttribute("data-held", true);
         document.getElementById(keptdie).removeAttribute("hidden");
-        
     }
     else{
-        //alert(die);
         if(die.startsWith("kept")){
             die = die.replace("kept", "");
         }
@@ -490,7 +644,6 @@ function moveDie(id){
         document.getElementById(die).removeAttribute("hidden");
         document.getElementById(keptdie).setAttribute("hidden", true);
         document.getElementById(keptdie).removeAttribute("data-held");
-        
     }
 }
 
@@ -554,6 +707,7 @@ function gameOver(){
 function whoWon(){
     document.getElementById("main").setAttribute("hidden", true);
     document.getElementById("diced").setAttribute("hidden", true);
+    document.getElementById("scoreButtons").setAttribute("hidden", true);
     document.getElementById("winners").removeAttribute("hidden");
 
     if(players == 1){
@@ -585,11 +739,12 @@ function whoWon(){
     scores figure out
     update score
 
-    validate if has score cannot add no button
+   
     validate so that the buttons arent red if score already exists
+
     large and small straight still get small and large when only have small?
     final turn the leftover dice go to the kept dice
-    reset the red for old rolls? 
+    reset the red for old rolls? verify yatzy
 
 
     notes reference info from joe in class
