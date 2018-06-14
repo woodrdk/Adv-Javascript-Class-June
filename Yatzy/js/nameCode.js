@@ -1,4 +1,8 @@
 
+// Welcome to "Yatzy" my Advanced Javascript school assignment for Spring Str 2018
+// Robert M Wood Jr.
+// June 19 2018 
+// more updates to come and clean up with time
 var diceImage = ["die1.jpg", "die2.jpg","die3.jpg", "die4.jpg", "die5.jpg", "die6.jpg"]; // array of image code for the dice images
 var player2Name;        // player 2s name inputted in the text box
 var player3Name;        // player 3s name inputted in the text box
@@ -201,22 +205,30 @@ function rollDice(){
 }
 
 function hold(){
-    getdies();   
-    document.getElementById("scoreButtons").removeAttribute("hidden");
+    var isAllHeld = false;
+    isAllHeld = all5Held();
+    if(isAllHeld == true){
+        getdies();   
+        document.getElementById("scoreButtons").removeAttribute("hidden");
+    }
+    
 }
 
-function Points(){ // can delete after done testing
-    var x = document.querySelectorAll(".Points");
-    for (var i = 0; i < x.length; i++) {
-       // x[i].style.backgroundColor = "red";
-      //  x[i].style.color = "white";
+function all5Held(){
+    if(document.getElementById("keptdie1").getAttribute("data-held") == "true" &&
+        document.getElementById("keptdie2").getAttribute("data-held") == "true" &&
+        document.getElementById("keptdie3").getAttribute("data-held") == "true" &&
+        document.getElementById("keptdie4").getAttribute("data-held") == "true" &&
+        document.getElementById("keptdie5").getAttribute("data-held") == "true"){
+       return true; 
+    }
+    else{
+        alert("Must have 5 dice held")
     }
 }
 
-///// need this to work
 function removePoints(){
     var y = document.querySelectorAll(".Points");
-    
     for (var bye = 0; bye < y.length; bye++) {
         y[bye].classList.remove("Points");
     }
@@ -276,7 +288,6 @@ function turnScore(dieScore){
 
     var scoresString = dieScore.join('');
     var uniqueNums = [];
-
     $.each(dieScore, function(i, el){
         if($.inArray(el, uniqueNums) === -1) uniqueNums.push(el);
     });
@@ -284,7 +295,6 @@ function turnScore(dieScore){
     var uniqueScores = uniqueNums.join('');
 
     ////////////////////////////////////////////////////////////////////// 3 of kind
-    
     var kind3Total = 0;
     threeOfKind = /(\d{1})\1\1/.test(scoresString);
     if(threeOfKind == true){
@@ -295,12 +305,9 @@ function turnScore(dieScore){
         if(valueExists(document.getElementById("3 of a kind player " + playersTurn)) == false) {
             document.getElementById("3ofKindButton").classList.add("Points");
         }
-
     }
      
     /////////////////////////////////////////////////////////////////////// 4 of kind
-
-    
     var kind4Total = 0;
     fourOfKind = /(\d{1})\1\1\1/.test(scoresString);
     if(fourOfKind == true){
@@ -311,20 +318,19 @@ function turnScore(dieScore){
     }
 
     ///////////////////////////////////////////////////////////////////////////// full house
-    
     fullHouse = /(\d{1})\1/.test(scoresString) && /(\d{1})\1\1/.test(scoresString);
     if(fullHouse == true){
         document.getElementById("FullHouseButton").classList.add("Points");
     }
 
     ///////////////////////////////////////////////////////////////////////// yatzy
-    
-    if(uniqueScores.length == 1){
+    var realYatzy = /(\d{1})\1\1\1\1/.test(scoresString);
+    if(realYatzy == true){
         document.getElementById("YatzyButton").classList.add("Points");
         yatzyScore = true;
     }
 
-    ///////////////////////////////////////////////////////////////////////// small straight
+    ///////////////////////////////////////////////////////////////////////// straights
     
     if (uniqueScores == "12345" || uniqueScores == "23456" ) {
         document.getElementById("LargeStraightButton").classList.add("Points");
@@ -332,30 +338,29 @@ function turnScore(dieScore){
         largeS = true;
     }
 
-    if (uniqueScores == "1234" || uniqueScores == "2345" || uniqueScores == "3456" ) {
+    if (SmallStraightVariables() == true) {
         document.getElementById("SmallStraightButton").classList.add("Points");
         smallS = true;
     }
-    
-
-    ///////////////////////////////////////////////////////////// large straight
-    
-    //&& document.getElementById("Large Straight player " + playersTurn).value == " "
-    
-    
-    /////////////////////////////////////////////////////////// chance
-    
-
+    // chance
     if(chance == false){
         for(chanceLoop = 0; chanceLoop < 5; chanceLoop++){
             chanceTotal += dieScore[chanceLoop];
         }
         document.getElementById("ChanceButton").classList.add("Points");
     }
-    
-    
 }
-
+/////  fix this to fix small straight  also figure out how to fix full house issue
+function SmallStraightVariables(){
+    var SSV = ["11234", "21234", "31234", "41234", "51234", "61234" , "12345", "22345", "32345", "42345", "52345", "62345", "13456", "23456", "33456", "43456", "53456", "63456", "12341","12342","12343","12344","12345","12346", "23451","23452","23453","23454","23455","23456", "34561" ,"34562" ,"34563" ,"34564" ,"34565" ,"34566"];
+    /*for(ssvLoop = 0; ssvLoop < SSV.length; ssvLoop++){
+        if(uniqueScores == SSV){
+            return true;
+        }
+    }
+   */
+    return true;
+}
 function Aces(){
     if(valueExists(document.getElementById("Aces player " + playersTurn))){
         alert("Already have score here");
@@ -600,6 +605,19 @@ function playerTurn(){
         document.getElementById("keptdie4").setAttribute("hidden", true);
         document.getElementById("keptdie5").setAttribute("hidden", true);
         document.getElementById("scoreButtons").setAttribute("hidden", true);
+
+        document.getElementById("keptdie1").src = "";
+        document.getElementById("keptdie2").src = "";
+        document.getElementById("keptdie3").src = "";
+        document.getElementById("keptdie4").src = "";
+        document.getElementById("keptdie5").src = "";
+        
+        document.getElementById("keptdie1").setAttribute("data-held", false);
+        document.getElementById("keptdie2").setAttribute("data-held", false);
+        document.getElementById("keptdie3").setAttribute("data-held", false);
+        document.getElementById("keptdie4").setAttribute("data-held", false);
+        document.getElementById("keptdie5").setAttribute("data-held", false);
+
         chanceTotal = 0;
         onesTotal = 0;
         twosTotal = 0;
@@ -607,6 +625,9 @@ function playerTurn(){
         foursTotal = 0;
         fivesTotal = 0;
         sixesTotal = 0;
+        scoresString = "";
+        uniqueNums = [];
+        dieScore = [];
         fullHouse = false;
         threeOfKind = false;
         fourOfKind = false;
@@ -618,7 +639,6 @@ function playerTurn(){
         removePoints();
     }
 }
-
 function moveDie(id){
     var keptdie;
     if(id.startsWith("die")){
@@ -672,7 +692,6 @@ function gameOver(){
         document.getElementById("Lower Total player " + upperLoop).innerHTML = lowerScoreTotal; 
         document.getElementById("Grand Total player " + upperLoop).innerHTML = upperScoreTotal + lowerScoreTotal;   
         document.getElementById("Upper Total player " + upperLoop).innerHTML = document.getElementById("Total player " + upperLoop).innerText;  // for Bottom upper total score
-          
     }  
 
     switch (players)
@@ -696,12 +715,7 @@ function gameOver(){
             userTotal = document.getElementById("Grand Total player 1").value; 
             break;
     }  
-    whoWon();
-    //
-    // want to add this line of code in to have a reset button when game is won
-    // <input type="button" value="Reload Page" onClick="document.location.reload(true)">
-    // winner screen
-    
+    whoWon();   
 }
 
 function whoWon(){
@@ -732,214 +746,12 @@ function whoWon(){
     if(players == 4){
         document.getElementById("if4").removeAttribute("hidden");
         // finish
-
     }
 }
 /*
-    scores figure out
-    update score
-
-   
     validate so that the buttons arent red if score already exists
-
-    large and small straight still get small and large when only have small?
-    final turn the leftover dice go to the kept dice
-    reset the red for old rolls? verify yatzy
-
-
-    notes reference info from joe in class
-
-    var currentRoll = 0;
-var turnNumber = 0;
-var upperSectionTotal = 0;
-
-window.onload = function(){
-    document.getElementById("roll-dice").onclick = rollDice;
-
-    //set up die images onclick to toggle held
-    var dieElements = document.querySelectorAll("#dice-section>img");
-    for (var index = 0; index < dieElements.length; index++) {
-        dieElements[index].onclick = toggleDieHeld;
-    }
-
-    //set up scoreBox onclick to set score
-    var scoringElements = document.querySelectorAll("td.scorable");
-    for (let currIndex = 0; currIndex < scoringElements.length; currIndex++) {
-        scoringElements[currIndex].onclick = calcScore;
-    }
-
-    rollDice();
-}
-
- 
-function rollDice(){
-    var dice = getDiceElements();
-    
-    for (let index = 0; index < dice.length; index++) {
-        if(isDieHeld(dice[index])){
-            continue;
-        }
-        var rollValue = getRandom();
-        dice[index].setAttribute("dice-value", rollValue);
-        setDieImage(dice[index], rollValue);
-    }
-    currentRoll++;
-    if(currentRoll == 3){
-        document.getElementById("roll-dice").setAttribute("disabled", true);
-    }
-        document.getElementById("current-roll").innerText = "Roll #" + currentRoll;       
- 
-}
-
-
-function getDiceElements(){
-    return document.querySelectorAll("#dice-section>img");
-}
-
-function getDiceValues(){
-    var dieElements = getDiceElements();
-    var dieVals = [];
-    for (var index = 0; index < dieElements.length; index++) {
-        //get value from img element and add to array
-        dieVals.push(dieElements[index].getAttribute("dice-value"));
-    }
-    return dieVals;
-}
-
-function isDieHeld(dieElement){
-    if(dieElement.getAttribute("dice-held") == "true"){
-        return true;
-    }
-    return false;
-}
-function resetHeld(){
-    var dieElements = getDiceElements();
-    for(var i = 0; i < dieElements.length; i++){
-        dieElements[i].setAttribute("dice-held", "false");
-    }
-}
-function toggleDieHeld(){
-    var currDieElement = this;
-    if(currDieElement.getAttribute("dice-held") == "false"){
-        currDieElement.setAttribute("dice-held", "true");
-    }
-    else{
-        currDieElement.setAttribute("dice-held", "false");
-    }
-}
-
-function endTurn(){
-    currentRoll = 0;
-    turnNumber++;
-
-    if(turnNumber == 13)
-        alert("End Game here");
-
-    rollDice();
-    resetHeld();
-
-    document.getElementById("roll-dice").removeAttribute("disabled");
-}
-function getRandom(){
-    return Math.floor((Math.random() * 6) + 1);
-}
-function setDieImage(dieImageElement, rollValue){
-    switch(rollValue){
-        case 1:
-            dieImageElement.src = "/images/die1.png";
-            break;
-        case 2:
-            dieImageElement.src = "/images/die2.png";
-            break;
-        case 3:
-            dieImageElement.src = "/images/die3.png";
-            break;
-        case 4:
-            dieImageElement.src = "/images/die4.png";
-            break;
-        case 5:
-            dieImageElement.src = "/images/die5.png";
-            break;
-        case 6:
-            dieImageElement.src = "/images/die6.png";
-            break;
-    }
-}
-function calcScore(){
-    //get selected scoreBox element (the <td> that was clicked)
-    var scoreElement = this;
-
-    //ensures scoreBox is not already scored
-    if(alreadyScored(scoreElement)){
-        alert("You already chose this");
-        return;
-    }
-
-    //get the type of score and ensure it cannot be scored again
-    var scoreType = scoreElement.getAttribute("data-score");
-    scoreElement.setAttribute("already-scored", true);
-    
-    //get dice roll values
-    var diceValues = getDiceValues();
-    var score = 0;
-    switch(scoreType){
-        case "ones":
-            score = calcUpperSection(diceValues, 1);
-            displayScore(scoreElement, score);
-            upperSectionTotal += score;
-        break;
-        case "twos":
-            score = calcUpperSection(diceValues, 2);
-            displayScore(scoreElement, score);
-            upperSectionTotal += score;
-        break;
-        case "threes":
-        break;
-        case "fours":
-        break;
-        case "fives":
-        break;
-        case "sixes":
-        break;
-        case "three-of-a-kind":
-        break;
-        case "four-of-a-kind":
-        break;
-        case "small-straight":
-        break;
-        case "large-straight":
-        break;
-        case "yatzy":
-        break;
-        case "chance":
-        break;
-        case "full-house":
-        break;
-    }
-    //after score is picked end players turn
-    endTurn();
-}
-
-function calcUpperSection(diceValues, numToCheck){
-    var sum = 0;
-    for(var i = 0; i < diceValues.length; i++){
-        if(diceValues[i] == numToCheck){
-            sum += numToCheck;
-        }
-    }
-    return sum;
-}
-
-function alreadyScored(scoreElement){
-    if(scoreElement.hasAttribute("already-scored"))
-        return true;
-    return false;
-}
-
-function displayScore(scoreElement, scoreVal){
-    var displayTableData = scoreElement.nextElementSibling;
-    displayTableData.innerText = scoreVal;
-}
+    validate for small straight and fix full house
+    reset the red for old rolls? 
 */
 
 
