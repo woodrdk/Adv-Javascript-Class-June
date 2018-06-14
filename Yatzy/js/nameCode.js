@@ -585,7 +585,8 @@ function removeColor(playersTurn){
 
 // changes which players turn it is for score and for indicator
 function playerTurn(){ 
-    if(playersTurnCount === (( 12 * players))){
+    //alert(playersTurnCount);
+    if(playersTurnCount === (( 13 * players)-1)){
         gameOver();
     }
     
@@ -729,17 +730,21 @@ function whoWon(){
         document.getElementById("if").removeAttribute("hidden");
         document.getElementById("winner").innerHTML = userName;
     }
-    if(players >=2){
+    if(players ==2){
+        document.getElementById("winners").removeAttribute("hidden");
+        document.getElementById("if").removeAttribute("hidden");
         document.getElementById("if2").removeAttribute("hidden");
         if (userTotal > player2Total){
-            document.getElementById("winner").innerHTML = userTotal;
+            document.getElementById("winner").innerHTML = userName;
+            document.getElementById("1stPlace").innerHTML = player2Name;
         }
         else{
             document.getElementById("winner").innerHTML = player2Name;
+            document.getElementById("1stPlace").innerHTML = userName;
         }
     }
 
-    if(players >= 3){
+    if(players == 3){
         document.getElementById("if3").removeAttribute("hidden");
         // finish      
     }

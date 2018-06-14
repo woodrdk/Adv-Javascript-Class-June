@@ -8,12 +8,36 @@
   color: white;
 }
 footer {
-    position:fixed;bottom:0;left:0;right:0;height:30px;
-    height: 50px;
-    clear: both;
+    
     background-color: red;
     text-align: center;
     padding-top: 0px;
+    position:fixed;bottom:0;left:0;right:0;height:30px;
+    height: 50px;
+    clear: both;
+
+  }
+
+  #rules{
+    width: 100%;
+  }
+
+  #about{
+    width: 100%;
+  }
+  #header{
+    text-align: center;
+  }
+
+  #if, #if2, #if3, #if4{
+    text-align: center;
+
+  }
+  #winners{
+    margin: auto;
+    width: 50%;
+    border: 3px solid greenyellow;
+    padding: 10px;
   }
 
   aside {
@@ -54,6 +78,7 @@ footer {
 table, th, td {
   border: 1px solid black;
 }
+
 #divRoll{
     display: flex;
     align-items: center;
@@ -101,8 +126,10 @@ table, th, td {
   border-radius: 10px;
 }
 .trophys{
-  height: 15%;
-  width: 15%;
+  height: 100%;
+  width: auto;
+  margin: auto;
+
 }
 .fourth{
   width: 12.5%;
@@ -125,4 +152,9 @@ footer{
 article{
   float: right;
   clear: both;
+}
+
+.trophy{
+  width: 50px;
+  height: 150px;
 }
