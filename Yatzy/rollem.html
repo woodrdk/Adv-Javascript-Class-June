@@ -11,6 +11,7 @@
             var index=0;
             var diceImage = ["/images/die1.jpg", "/images/die2.jpg","/images/die3.jpg", "/images/die4.jpg", "/images/die5.jpg", "/images/die6.jpg"];
             var rollsCount = 0;
+            
             function slide(){
                 document["dice"].src = diceImage[index];
                 index++;
@@ -18,7 +19,10 @@
                 if(index >= diceImage.length){
                     index=0;
                 }
-
+                if(rollsCount == 5){
+                    clearTimeout(myVar);
+                }
+                console.log(rollsCount);
             }
 
 
@@ -49,10 +53,10 @@
 
         <button onclick="clearTimeout(myVar)">Stop it</button>
 
-        <button onclick="setTimeout(ended, 2000)">Stop it</button>
+        <button onclick="setTimeout(ended, 2000)">delayed appear</button>
 
         <button onclick="testerDice()">test</button>
 
-        <img id="dice" src="" width="400" height="400" name="image" />
+        <img id="dice" src="/images/die1.jpg" width="400" height="400" name="image" />
 </body>
 </html>
