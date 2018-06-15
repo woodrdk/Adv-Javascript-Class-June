@@ -19,17 +19,17 @@
                 if(index >= diceImage.length){
                     index=0;
                 }
-                if(rollsCount == 5){
+                if(rollsCount == 25){
                     clearTimeout(myVar);
+                    var randomdice1 = Math.round(Math.random()*5) ;
+                    document.getElementById("dice").src=diceImage[randomdice1];
+                    rollsCount= 0;
                 }
-                console.log(rollsCount);
+          
             }
 
 
-            function timedText() {
-               setTimeout(myTimeout1, 2000) 
-            }
-
+/*
             function ended(){
                 var randomdice1 = Math.round(Math.random()*5);
                 document.getElementById("dice").src=diceImage[randomdice1];
@@ -41,10 +41,9 @@
                 }
                 else{
                     setInterval(slide, 200);
-                }
-                
-                
+                }   
             }
+            */
     </script>
 </head>
 <body>
