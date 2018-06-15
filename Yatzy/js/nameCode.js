@@ -18,6 +18,10 @@ var playersTurn = 1;    // which players turn it is 1 - 4
 var dieRoll = 0;        // how many rolls have been made
 var playersTurnCount = 0;   // total players turns made to count for the game ending
 
+var playerTest = playerScoreTotal.slice(0); 
+
+var winner = [];
+
 /////////////////////// scores for the single digits 1 - 6
 var chanceTotal = 0;   
 var onesTotal = 0;
@@ -26,7 +30,7 @@ var threesTotal = 0;
 var foursTotal = 0;
 var fivesTotal = 0;
 var sixesTotal = 0;
-
+var userName;
             // onload preperation
 window.onload = function(){
     // following is to cut down on move die functions to 1 instead of 5
@@ -698,24 +702,29 @@ function gameOver(){
     switch (players)
     {
         case "2":
+            userTotal = document.getElementById("Grand Total player 1").value; 
             player2Total = document.getElementById("Grand Total player 2").value;  
-            break;
-        
+            break;        
         case "3":
+            userTotal = document.getElementById("Grand Total player 1").value; 
             player2Total = document.getElementById("Grand Total player 2").value;  
             player3Total = document.getElementById("Grand Total player 3").value; 
+            playerScoreTotal = [userTotal, player2Total, player3Total]; 
             break;
 
         case "4":
+            userTotal = document.getElementById("Grand Total player 1").value; 
             player2Total = document.getElementById("Grand Total player 2").value;  
             player3Total = document.getElementById("Grand Total player 3").value; 
             player4Total = document.getElementById("Grand Total player 4").value; 
+            playerScoreTotal = [userTotal, player2Total, player3Total, player4Total ]; 
             break;
         
         default:
             userTotal = document.getElementById("Grand Total player 1").value; 
             break;
     }  
+    
     whoWon();   
 }
 
@@ -744,19 +753,60 @@ function whoWon(){
         }
     }
 
+    
     if(players == 3){
+        document.getElementById("winners").removeAttribute("hidden");
+        document.getElementById("if").removeAttribute("hidden");
+        document.getElementById("if2").removeAttribute("hidden");
         document.getElementById("if3").removeAttribute("hidden");
-        // finish      
+        playerTest = playerTest.sort();
+        for(var winners = 0; winners < playerScoreTotal.length; winners++){
+            for(var rank = 0; rank < playerScoreTotal.length; rank++){
+                if(playerScoreTotal[winners] == playerTest[rank]){
+                    winner[winner] = "player " + (winner + 1);
+                }
+            }
+            if(winner[winner] == "player1"){
+                winner[winner] = userName;
+            }
+            if(winner[winner] == "player2"){
+                winner[winner] = player2Name;
+            }
+            if(winner[winner] == "player3"){
+                winner[winner] = player3Name;
+            }
+        }
+        
+        document.getElementById("winner").innerHTML = winner[0];
+        document.getElementById("1stPlace").innerHTML = winner[1];
+        document.getElementById("2ndPlace").innerHTML = winner[2];
     }
+
     if(players == 4){
+        document.getElementById("winners").removeAttribute("hidden");
+        document.getElementById("if").removeAttribute("hidden");
+        document.getElementById("if2").removeAttribute("hidden");
+        document.getElementById("if3").removeAttribute("hidden");
         document.getElementById("if4").removeAttribute("hidden");
-        // finish
+        playerTest = playerTest.sort();
+        for(var winners = 0; winners < playerScoreTotal.length; winners++){
+            for(var rank = 0; rank < playerScoreTotal.length; rank++){
+                if(playerScoreTotal[winners] == playerTest[rank]){
+                    winner[winner] = "player " + winner + 1;
+                }
+            }
+        }
+        document.getElementById("winner").innerHTML = winner[0];
+        document.getElementById("1stPlace").innerHTML = winner[1];
+        document.getElementById("2ndPlace").innerHTML = winner[2];
+        document.getElementById("4thPlace").innerHTML = winner[3]
     }
 }
 /*
     validate so that the buttons arent red if score already exists
     validate for small straight and fix full house
     reset the red for old rolls? 
+    finish and fix scoring / trophys
 */
 
 

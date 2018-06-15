@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+            var image = document.getElementById("dice");
+            
+            var index=0;
+            var diceImage = ["/images/die1.jpg", "/images/die2.jpg","/images/die3.jpg", "/images/die4.jpg", "/images/die5.jpg", "/images/die6.jpg"];
+            var rollsCount = 0;
+            function slide(){
+                document["dice"].src = diceImage[index];
+                index++;
+                rollsCount++;
+                if(index >= diceImage.length){
+                    index=0;
+                }
+
+            }
+
+
+            function timedText() {
+               setTimeout(myTimeout1, 2000) 
+            }
+
+            function ended(){
+                var randomdice1 = Math.round(Math.random()*5);
+                document.getElementById("dice").src=diceImage[randomdice1];
+            }
+
+            function testerDice(){
+                if(rollsCount == 50){
+                    setTimeout(clearTimeout(setInterval(slide, 100)), 1000);
+                }
+                else{
+                    setInterval(slide, 200);
+                }
+                
+                
+            }
+    </script>
+</head>
+<body>
+        <button onclick="myVar = setInterval(slide, 100)">Try it</button>
+        
+
+        <button onclick="clearTimeout(myVar)">Stop it</button>
+
+        <button onclick="setTimeout(ended, 2000)">Stop it</button>
+
+        <button onclick="testerDice()">test</button>
+
+        <img id="dice" src="" width="400" height="400" name="image" />
+</body>
+</html>
