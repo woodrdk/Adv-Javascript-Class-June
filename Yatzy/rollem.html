@@ -6,56 +6,52 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script>
-            var image = document.getElementById("dice");
-            
+             
             var index=0;
             var diceImage = ["/images/die1.jpg", "/images/die2.jpg","/images/die3.jpg", "/images/die4.jpg", "/images/die5.jpg", "/images/die6.jpg"];
             var rollsCount = 0;
             
-            function slide(){
-                document["dice"].src = diceImage[index];
+            function rollTheDice(){
+               // document["dice"].src = diceImage[index];
+                var randomdice1 = Math.round(Math.random()*5);
+                var randomdice2 = Math.round(Math.random()*5);
+                var randomdice3 = Math.round(Math.random()*5);
+                var randomdice4 = Math.round(Math.random()*5);
+                var randomdice5 = Math.round(Math.random()*5);
+  
+                document.getElementById("die1").src = diceImage[randomdice2];
+                document.getElementById("die2").src = diceImage[randomdice1];
+                document.getElementById("die3").src = diceImage[randomdice3];
+                document.getElementById("die4").src = diceImage[randomdice4];
+                document.getElementById("die5").src = diceImage[randomdice5];
+                
                 index++;
                 rollsCount++;
                 if(index >= diceImage.length){
                     index=0;
                 }
-                if(rollsCount == 25){
+                if(rollsCount == 10){
                     clearTimeout(myVar);
-                    var randomdice1 = Math.round(Math.random()*5) ;
-                    document.getElementById("dice").src=diceImage[randomdice1];
                     rollsCount= 0;
                 }
           
             }
 
-
-/*
-            function ended(){
-                var randomdice1 = Math.round(Math.random()*5);
-                document.getElementById("dice").src=diceImage[randomdice1];
-            }
-
-            function testerDice(){
-                if(rollsCount == 50){
-                    setTimeout(clearTimeout(setInterval(slide, 100)), 1000);
-                }
-                else{
-                    setInterval(slide, 200);
-                }   
-            }
-            */
     </script>
 </head>
 <body>
-        <button onclick="myVar = setInterval(slide, 100)">Try it</button>
+        <button onclick="myVar = setInterval(rollTheDice, 100)">Try it</button>
         
-
-        <button onclick="clearTimeout(myVar)">Stop it</button>
-
+        <!--<button onclick="clearTimeout(myVar)">Stop it</button>
         <button onclick="setTimeout(ended, 2000)">delayed appear</button>
-
         <button onclick="testerDice()">test</button>
 
-        <img id="dice" src="/images/die1.jpg" width="400" height="400" name="image" />
+        <img id="dice" src="/images/die1.jpg" width="400" height="400" name="image" /> -->
+
+        <input type="image" src="images/die1.jpg" name="none" class="die" id="die1" style="width: 50px;" />
+        <input type="image" src="images/die2.jpg" name="none" class="die" id="die2" style="width: 50px;" />
+        <input type="image" src="images/die3.jpg" name="none" class="die" id="die3" style="width: 50px;" />
+        <input type="image" src="images/die4.jpg" name="none" class="die" id="die4" style="width: 50px;" />
+        <input type="image" src="images/die5.jpg" name="none" class="die" id="die5" style="width: 50px;" />
 </body>
 </html>

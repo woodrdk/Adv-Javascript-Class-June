@@ -4,9 +4,9 @@
 // June 19 2018 
 // more updates to come and clean up with time
 var diceImage = ["die1.jpg", "die2.jpg","die3.jpg", "die4.jpg", "die5.jpg", "die6.jpg"]; // array of image code for the dice images
-var player2Name;        // player 2s name inputted in the text box
-var player3Name;        // player 3s name inputted in the text box
-var player4Name;        // player 4s name inputted in the text box
+var player2Name;        // player 2s name input in the text box
+var player3Name;        // player 3s name input in the text box
+var player4Name;        // player 4s name input in the text box
 var players;            // how many players
 var namesArray = [];    // array of the players names
 var categoryArray = []; // array containing the names of the categories of scoring
@@ -17,11 +17,8 @@ var totalArray = [];
 var playersTurn = 1;    // which players turn it is 1 - 4
 var dieRoll = 0;        // how many rolls have been made
 var playersTurnCount = 0;   // total players turns made to count for the game ending
-
 var playerTest = playerScoreTotal.slice(0); 
-
 var winner = [];
-
 /////////////////////// scores for the single digits 1 - 6
 var chanceTotal = 0;   
 var onesTotal = 0;
@@ -59,7 +56,6 @@ function typeWriter() {
         document.getElementById("yesNoButton").removeAttribute("hidden");
     }
 }
-
             // next step is to verify username was input
 function verifyUserName(){
     if(document.getElementById("mainUserName").value.length < 1){
@@ -69,7 +65,6 @@ function verifyUserName(){
         typeWriter();
     }
 }
-
             // redirecting step asking if they want to play yatzy or redirect ot google.
 function redirect(){
     location.href = "http://www.google.com";
@@ -85,7 +80,6 @@ function choose(choice){
     playerName(players);
     document.getElementById("howMany").setAttribute("hidden", true);
 }
-
             // preps for how many players are to play
 function playerName(players){
     switch (players)
@@ -177,6 +171,34 @@ function makeScoreCard(players){
     document.getElementById("col" + playersTurn).style.backgroundColor = "white";
 }
 
+var index=0;
+var diceImage = ["images/die1.jpg", "images/die2.jpg","images/die3.jpg", "images/die4.jpg", "images/die5.jpg", "images/die6.jpg"];
+var rollsCount = 0;
+var myVar;
+function rollTheDice(){
+   // document["dice"].src = diceImage[index];
+    var randomdice1 = Math.round(Math.random()*5);
+    var randomdice2 = Math.round(Math.random()*5);
+    var randomdice3 = Math.round(Math.random()*5);
+    var randomdice4 = Math.round(Math.random()*5);
+    var randomdice5 = Math.round(Math.random()*5);
+
+    document.getElementById("die1").src = diceImage[randomdice2];
+    document.getElementById("die2").src = diceImage[randomdice1];
+    document.getElementById("die3").src = diceImage[randomdice3];
+    document.getElementById("die4").src = diceImage[randomdice4];
+    document.getElementById("die5").src = diceImage[randomdice5];
+    
+    index++;
+    rollsCount++;
+    if(index >= diceImage.length){
+        index=0;
+    }
+    if(rollsCount == 10){
+        clearTimeout(myVar);
+        rollsCount= 0;
+    }
+}
             // is the roll dice function
 function rollDice(){
     if(dieRoll == 0){
@@ -185,22 +207,10 @@ function rollDice(){
         document.getElementById("die3").removeAttribute("hidden");
         document.getElementById("die4").removeAttribute("hidden");
         document.getElementById("die5").removeAttribute("hidden");
+        
     }
     if(dieRoll < 3){    
-    
-        //create a random integer between 0 and 5
-        var randomdice1 = Math.round(Math.random()*5);
-        var randomdice2 = Math.round(Math.random()*5);
-        var randomdice3 = Math.round(Math.random()*5);
-        var randomdice4 = Math.round(Math.random()*5);
-        var randomdice5 = Math.round(Math.random()*5) ;
-        var randomdice6 = Math.round(Math.random()*5) ;
-    
-        document.getElementById("die1").src="images/"+diceImage[randomdice1];
-        document.getElementById("die2").src="images/"+diceImage[randomdice2];
-        document.getElementById("die3").src="images/"+diceImage[randomdice3];
-        document.getElementById("die4").src="images/"+diceImage[randomdice4];
-        document.getElementById("die5").src="images/"+diceImage[randomdice5];
+        myVar = setInterval(rollTheDice, 100);
         dieRoll++;
     }
     if(dieRoll == 3){
@@ -215,7 +225,6 @@ function hold(){
         getdies();   
         document.getElementById("scoreButtons").removeAttribute("hidden");
     }
-    
 }
 
 function all5Held(){
@@ -357,12 +366,6 @@ function turnScore(dieScore){
 /////  fix this to fix small straight  also figure out how to fix full house issue
 function SmallStraightVariables(){
     var SSV = ["11234", "21234", "31234", "41234", "51234", "61234" , "12345", "22345", "32345", "42345", "52345", "62345", "13456", "23456", "33456", "43456", "53456", "63456", "12341","12342","12343","12344","12345","12346", "23451","23452","23453","23454","23455","23456", "34561" ,"34562" ,"34563" ,"34564" ,"34565" ,"34566"];
-    /*for(ssvLoop = 0; ssvLoop < SSV.length; ssvLoop++){
-        if(uniqueScores == SSV){
-            return true;
-        }
-    }
-   */
     return true;
 }
 function Aces(){
@@ -378,7 +381,6 @@ function Aces(){
         }
         playerTurn();
     }
-    
 }
 function Twos(){
     if(valueExists(document.getElementById("Twos player " + playersTurn))){
@@ -548,7 +550,6 @@ function Kind3(){
         playerTurn();
     }
 }
-
             // get the dies for diescore and makes an array of the dice rolled
 function getdies(){
     var dieSource = [document.getElementById("keptdie1").src, document.getElementById("keptdie2").src, document.getElementById("keptdie3").src,
@@ -576,17 +577,14 @@ function getdies(){
     }
     turnScore(dieScore);
 }
-
             // sets the player whos turn it is to white 
 function setColor(playersTurn){   
     document.getElementById("col" + playersTurn).style.backgroundColor = "white";
 }
-
 // sets the player whos turn it was back to none  
 function removeColor(playersTurn){   
     document.getElementById("col" + playersTurn).style.backgroundColor = "greenyellow";
 }
-
 // changes which players turn it is for score and for indicator
 function playerTurn(){ 
     //alert(playersTurnCount);
@@ -753,7 +751,6 @@ function whoWon(){
         }
     }
 
-    
     if(players == 3){
         document.getElementById("winners").removeAttribute("hidden");
         document.getElementById("if").removeAttribute("hidden");
@@ -776,7 +773,6 @@ function whoWon(){
                 winner[winner] = player3Name;
             }
         }
-        
         document.getElementById("winner").innerHTML = winner[0];
         document.getElementById("1stPlace").innerHTML = winner[1];
         document.getElementById("2ndPlace").innerHTML = winner[2];
