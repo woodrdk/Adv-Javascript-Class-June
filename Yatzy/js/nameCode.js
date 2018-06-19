@@ -351,7 +351,7 @@ function turnScore(dieScore){
         largeS = true;
     }
 
-    if (SmallStraightVariables() == true) {
+    if (SmallStraightVariables(uniqueNums) == true) {
         document.getElementById("SmallStraightButton").classList.add("Points");
         smallS = true;
     }
@@ -364,9 +364,23 @@ function turnScore(dieScore){
     }
 }
 /////  fix this to fix small straight  also figure out how to fix full house issue
-function SmallStraightVariables(){
-    var SSV = ["11234", "21234", "31234", "41234", "51234", "61234" , "12345", "22345", "32345", "42345", "52345", "62345", "13456", "23456", "33456", "43456", "53456", "63456", "12341","12342","12343","12344","12345","12346", "23451","23452","23453","23454","23455","23456", "34561" ,"34562" ,"34563" ,"34564" ,"34565" ,"34566"];
-    return true;
+function SmallStraightVariables(uniqueNums){
+    var ssCount = 0;
+    var ssCount2 = 0;
+    for(ss = 0; ss < uniqueNums.length-1; ss++){
+        if(uniqueNums[ss] + 1 == uniqueNums[ss+1])
+        ssCount++;
+    }
+    for(ss2 = uniqueNums.length; ss2 > 1; ss2--){
+        if(uniqueNums[ss2] -1 == uniqueNums[ss2-1])
+        ssCount2++;
+    }
+    if(ssCount >= 3 || ssCount2){
+        return true;
+    }
+    
+
+        
 }
 function Aces(){
     if(valueExists(document.getElementById("Aces player " + playersTurn))){
