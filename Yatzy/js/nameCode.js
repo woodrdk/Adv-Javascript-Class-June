@@ -3,7 +3,7 @@
 // Robert M Wood Jr.
 // June 19 2018 
 // more updates to come and clean up with time
-var diceImage = ["die1.jpg", "die2.jpg","die3.jpg", "die4.jpg", "die5.jpg", "die6.jpg"]; // array of image code for the dice images
+var diceImage = ["die1.jpg", "die2.jpg", "die3.jpg", "die4.jpg", "die5.jpg", "die6.jpg"]; // array of image code for the dice images
 var player2Name;        // player 2s name input in the text box
 var player3Name;        // player 3s name input in the text box
 var player4Name;        // player 4s name input in the text box
@@ -253,7 +253,6 @@ function valueExists(info){
     }
     else{
         return true;
-        
     }
 }
 var fullHouse = false;
@@ -577,11 +576,10 @@ function getdies(){
     }
     turnScore(dieScore);
 }
-            // sets the player whos turn it is to white 
-function setColor(playersTurn){   
+function setColor(playersTurn){    // sets the player whos turn it is to white 
     document.getElementById("col" + playersTurn).style.backgroundColor = "white";
 }
-// sets the player whos turn it was back to none  
+// sets the player whos turn it was back to orig color 
 function removeColor(playersTurn){   
     document.getElementById("col" + playersTurn).style.backgroundColor = "greenyellow";
 }
